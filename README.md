@@ -1,3 +1,27 @@
+
+# requires node version 18
+
+```
+git clone https://github.com/bitnet-io/leather-hiro-wallet-bitnet
+cd leather-hiro-wallet-bitnet
+
+npm cache clean --force
+npm install --force
+
+
+
+to build from chrome
+
+rm -rf dist
+npm run build
+
+
+to build for firefox
+
+rm -rf dist
+TARGET_BROWSER=firefox npm run build
+```
+
 # Leather
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/ldinpeekobnhjjdofggfgjlcehhmanlj?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/stacks-wallet/ldinpeekobnhjjdofggfgjlcehhmanlj)

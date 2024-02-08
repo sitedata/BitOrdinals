@@ -1,7 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import { isError } from '@shared/utils';
-
 import { useAnalytics } from '@app/common/hooks/analytics/use-analytics';
 import { delay } from '@app/common/utils';
 import { useBitcoinClient } from '@app/store/common/api-clients.hooks';
@@ -32,10 +30,7 @@ export function useBitcoinBroadcastTransaction() {
         return txid;
       } catch (e) {
         onError?.(e as Error);
-        void analytics.track('error_broadcasting_transaction', {
-          errorName: isError(e) ? e.name : 'unknown',
-          errorMsg: isError(e) ? e.message : 'unknown',
-        });
+        void analytics.track('error_broadcasting_transaction', { error: e });
         return;
       } finally {
         setIsBroadcasting(false);

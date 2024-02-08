@@ -44,17 +44,12 @@ export async function connectLedgerStacksApp() {
   return new StacksApp(transport);
 }
 
-export interface StacksAppVersion extends Awaited<ReturnType<StacksApp['getVersion']>> {
-  name: 'Stacks';
-  chain: 'stacks';
-}
-
-export async function getStacksAppVersion(app: StacksApp): Promise<StacksAppVersion> {
-  const appVersion = await app.getVersion();
-  if (appVersion.errorMessage !== 'No errors') {
-    throw new Error(appVersion.errorMessage);
+export async function getStacksAppVersion(app: StacksApp) {
+  const resp = await app.getVersion();
+  if (resp.errorMessage !== 'No errors') {
+    throw new Error(resp.errorMessage);
   }
-  return { name: LEDGER_APPS_MAP.STACKS, chain: 'stacks' as const, ...appVersion };
+  return { name: 'Stacks', ...resp };
 }
 
 export const prepareLedgerDeviceStacksAppConnection = prepareLedgerDeviceForAppFn(
@@ -114,8 +109,4 @@ export function isVersionOfLedgerStacksAppWithContractPrincipalBug(
     versionFromWhichContractPrincipalBugIsFixed,
     '<'
   );
-}
-
-export function isStacksAppOpen({ name }: { name: string }) {
-  return name === LEDGER_APPS_MAP.STACKS;
 }

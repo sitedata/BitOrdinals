@@ -5,7 +5,6 @@ import { bytesToHex } from '@stacks/common';
 import { StacksTransaction, broadcastTransaction } from '@stacks/transactions';
 
 import { logger } from '@shared/logger';
-import { isError } from '@shared/utils';
 
 import { getErrorMessage } from '@app/common/get-error-message';
 import { useRefreshAllAccountData } from '@app/common/hooks/account/use-refresh-all-account-data';
@@ -60,7 +59,7 @@ export function useSubmitTransactionCallback({ loadingKey }: UseSubmitTransactio
           }
         } catch (error) {
           logger.error('Transaction callback', { error });
-          onError(isError(error) ? error : { name: '', message: '' });
+          onError(error instanceof Error ? error : { name: '', message: '' });
           setIsIdle();
         }
       },

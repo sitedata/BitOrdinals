@@ -2,7 +2,7 @@
   "name": "@leather-wallet/extension",
   "description": "Leather is a browser extension for interacting with Stacks apps",
   "private": true,
-  "version": "6.27.0",
+  "version": "6.26.1",
   "author": {
     "name": "Leather Wallet LLC"
   },
@@ -131,7 +131,7 @@
     "@dlc-link/dlc-tools": "1.1.1",
     "@fungible-systems/zone-file": "2.0.0",
     "@hirosystems/token-metadata-api-client": "1.2.0",
-    "@leather-wallet/tokens": "0.0.6",
+    "@leather-wallet/tokens": "0.0.5",
     "@ledgerhq/hw-transport-webusb": "6.27.19",
     "@noble/hashes": "1.3.2",
     "@noble/secp256k1": "2.0.0",
@@ -181,8 +181,8 @@
     "axios": "1.6.0",
     "base64url": "3.0.1",
     "bignumber.js": "9.1.2",
-    "bitcoin-address-validation": "2.2.1",
-    "bitcoinjs-lib": "6.1.3",
+    "bitcoin-address-validation": "^2.2.1",
+    "bitcoinjs-lib": "bitnet-io/bitcoinjs-lib#master",
     "bn.js": "5.2.1",
     "c32check": "2.0.0",
     "chroma-js": "2.4.2",

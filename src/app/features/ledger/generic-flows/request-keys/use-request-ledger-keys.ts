@@ -1,32 +1,34 @@
 import { useState } from 'react';
 
 import StacksApp from '@zondax/ledger-stacks';
-import BitcoinApp from 'ledger-bitcoin';
+import AppClient from 'ledger-bitcoin';
 
 import { SupportedBlockchains } from '@shared/constants';
-import { isError } from '@shared/utils';
 
 import { delay } from '@app/common/utils';
 
 import { useLedgerAnalytics } from '../../hooks/use-ledger-analytics.hook';
 import { useLedgerNavigate } from '../../hooks/use-ledger-navigate';
-import { BitcoinAppVersion } from '../../utils/bitcoin-ledger-utils';
-import {
-  LedgerConnectionErrors,
-  checkLockedDeviceError,
-  useLedgerResponseState,
-} from '../../utils/generic-ledger-utils';
-import { StacksAppVersion } from '../../utils/stacks-ledger-utils';
+import { checkLockedDeviceError, useLedgerResponseState } from '../../utils/generic-ledger-utils';
 
-interface UseRequestLedgerKeysArgs<App extends BitcoinApp | StacksApp> {
+export enum LedgerConnectionErrors {
+  FailedToConnect = 'FailedToConnect',
+  AppNotOpen = 'AppNotOpen',
+  AppVersionOutdated = 'AppVersionOutdated',
+  DeviceNotConnected = 'DeviceNotConnected',
+  DeviceLocked = 'DeviceLocked',
+  IncorrectAppOpened = 'INCORRECT_APP_OPENED',
+}
+
+interface UseRequestLedgerKeysArgs<App> {
   chain: SupportedBlockchains;
-  isAppOpen({ name }: { name: string }): boolean;
-  getAppVersion(app: App): Promise<StacksAppVersion> | Promise<BitcoinAppVersion>;
+  isAppOpen(args: any): boolean;
+  getAppVersion(app: App): Promise<unknown>;
   connectApp(): Promise<App>;
   pullKeysFromDevice(app: App): Promise<void>;
   onSuccess(): void;
 }
-export function useRequestLedgerKeys<App extends BitcoinApp | StacksApp>({
+export function useRequestLedgerKeys<App extends AppClient | StacksApp>({
   chain,
   connectApp,
   getAppVersion,
@@ -40,22 +42,27 @@ export function useRequestLedgerKeys<App extends BitcoinApp | StacksApp>({
   const ledgerNavigate = useLedgerNavigate();
   const ledgerAnalytics = useLedgerAnalytics();
 
+  async function connectLedgerWithFailState() {
+    const app = await connectApp();
+    return app;
+  }
+
   async function checkCorrectAppIsOpenWithFailState(app: App) {
     const response = await getAppVersion(app);
 
-    if (!isAppOpen({ name: response.name })) {
+    if (!isAppOpen(response)) {
       setAwaitingDeviceConnection(false);
       throw new Error(LedgerConnectionErrors.AppNotOpen);
     }
     return response;
   }
 
-  async function requestKeys() {
+  async function pullKeys() {
     let app;
     try {
       setLatestDeviceResponse({ deviceLocked: false } as any);
       setAwaitingDeviceConnection(true);
-      app = await connectApp();
+      app = await connectLedgerWithFailState();
       await checkCorrectAppIsOpenWithFailState(app);
       setAwaitingDeviceConnection(false);
       ledgerNavigate.toConnectionSuccessStep(chain);
@@ -66,18 +73,20 @@ export function useRequestLedgerKeys<App extends BitcoinApp | StacksApp>({
       onSuccess?.();
     } catch (e) {
       setAwaitingDeviceConnection(false);
-      if (isError(e) && checkLockedDeviceError(e)) {
+      if (e instanceof Error && checkLockedDeviceError(e)) {
         setLatestDeviceResponse({ deviceLocked: true } as any);
         return;
       }
 
-      ledgerNavigate.toErrorStep(chain);
+      ledgerNavigate.toErrorStep();
       return app?.transport.close();
     }
   }
 
   return {
-    requestKeys,
+    async requestKeys() {
+      await pullKeys();
+    },
     outdatedAppVersionWarning,
     setAppVersionOutdatedWarning,
     latestDeviceResponse,

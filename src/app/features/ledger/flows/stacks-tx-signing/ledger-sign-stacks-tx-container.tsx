@@ -1,33 +1,37 @@
-import { useEffect, useState } from 'react';
-import { Route, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Outlet, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import { deserializeTransaction } from '@stacks/transactions';
-import StacksApp, { LedgerError } from '@zondax/ledger-stacks';
+import { LedgerError } from '@zondax/ledger-stacks';
 import get from 'lodash.get';
 
+import { logger } from '@shared/logger';
 import { RouteUrls } from '@shared/route-urls';
-import { isError } from '@shared/utils';
 
 import { useScrollLock } from '@app/common/hooks/use-scroll-lock';
 import { appEvents } from '@app/common/publish-subscribe';
 import { delay } from '@app/common/utils';
-import { LedgerTxSigningContext } from '@app/features/ledger/generic-flows/tx-signing/ledger-sign-tx.context';
+import { BaseDrawer } from '@app/components/drawer/base-drawer';
 import {
-  connectLedgerStacksApp,
+  LedgerTxSigningContext,
+  LedgerTxSigningProvider,
+  createWaitForUserToSeeWarningScreen,
+} from '@app/features/ledger/generic-flows/tx-signing/ledger-sign-tx.context';
+import {
   getStacksAppVersion,
-  isStacksAppOpen,
   isVersionOfLedgerStacksAppWithContractPrincipalBug,
+  prepareLedgerDeviceStacksAppConnection,
   signLedgerStacksTransaction,
   signStacksTransactionWithSignature,
+  useActionCancellableByUser,
 } from '@app/features/ledger/utils/stacks-ledger-utils';
 import { useCurrentStacksAccount } from '@app/store/accounts/blockchain/stacks/stacks-account.hooks';
 
 import { ledgerSignTxRoutes } from '../../generic-flows/tx-signing/ledger-sign-tx-route-generator';
-import { TxSigningFlow } from '../../generic-flows/tx-signing/tx-signing-flow';
-import { useLedgerSignTx } from '../../generic-flows/tx-signing/use-ledger-sign-tx';
 import { useLedgerAnalytics } from '../../hooks/use-ledger-analytics.hook';
 import { useLedgerNavigate } from '../../hooks/use-ledger-navigate';
 import { useVerifyMatchingLedgerStacksPublicKey } from '../../hooks/use-verify-matching-stacks-public-key';
+import { checkLockedDeviceError, useLedgerResponseState } from '../../utils/generic-ledger-utils';
 import { ApproveSignLedgerStacksTx } from './steps/approve-sign-stacks-ledger-tx';
 
 export const ledgerStacksTxSigningRoutes = ledgerSignTxRoutes({
@@ -39,15 +43,16 @@ export const ledgerStacksTxSigningRoutes = ledgerSignTxRoutes({
 
 function LedgerSignStacksTxContainer() {
   const location = useLocation();
+  const navigate = useNavigate();
   const ledgerNavigate = useLedgerNavigate();
   const ledgerAnalytics = useLedgerAnalytics();
   useScrollLock(true);
   const account = useCurrentStacksAccount();
+  const canUserCancelAction = useActionCancellableByUser();
   const verifyLedgerPublicKey = useVerifyMatchingLedgerStacksPublicKey();
   const [unsignedTx, setUnsignedTx] = useState<null | string>(null);
-  const navigate = useNavigate();
 
-  const chain = 'stacks' as const;
+  const hasUserSkippedBuggyAppWarning = useMemo(() => createWaitForUserToSeeWarningScreen(), []);
 
   useEffect(() => {
     const tx = get(location.state, 'tx');
@@ -56,38 +61,52 @@ function LedgerSignStacksTxContainer() {
 
   useEffect(() => () => setUnsignedTx(null), []);
 
-  const {
-    signTransaction,
-    latestDeviceResponse,
-    awaitingDeviceConnection,
-    hasUserSkippedBuggyAppWarning,
-  } = useLedgerSignTx<StacksApp>({
-    chain,
-    isAppOpen: isStacksAppOpen,
-    getAppVersion: getStacksAppVersion,
-    connectApp: connectLedgerStacksApp,
-    async passesAdditionalVersionCheck(appVersion) {
-      if (appVersion.chain !== 'stacks') {
-        return true;
+  const [latestDeviceResponse, setLatestDeviceResponse] = useLedgerResponseState();
+
+  const [awaitingDeviceConnection, setAwaitingDeviceConnection] = useState(false);
+
+  const signTransaction = async () => {
+    if (!account) return;
+
+    const stacksApp = await prepareLedgerDeviceStacksAppConnection({
+      setLoadingState: setAwaitingDeviceConnection,
+      onError(e) {
+        if (e instanceof Error && checkLockedDeviceError(e)) {
+          setLatestDeviceResponse({ deviceLocked: true } as any);
+          return;
+        }
+        ledgerNavigate.toErrorStep();
+      },
+    });
+
+    try {
+      const versionInfo = await getStacksAppVersion(stacksApp);
+      ledgerAnalytics.trackDeviceVersionInfo(versionInfo);
+      setLatestDeviceResponse(versionInfo);
+
+      if (versionInfo.deviceLocked) {
+        setAwaitingDeviceConnection(false);
+        return;
       }
 
-      if (isVersionOfLedgerStacksAppWithContractPrincipalBug(appVersion)) {
+      if (versionInfo.returnCode !== LedgerError.NoErrors) {
+        logger.error('Return code from device has error', versionInfo);
+        return;
+      }
+
+      if (isVersionOfLedgerStacksAppWithContractPrincipalBug(versionInfo)) {
         navigate(RouteUrls.LedgerOutdatedAppWarning);
         const response = await hasUserSkippedBuggyAppWarning.wait();
 
         if (response === 'cancelled-operation') {
           ledgerNavigate.cancelLedgerAction();
+          return;
         }
-        return false;
       }
-      return true;
-    },
-    async signTransactionWithDevice(stacksApp) {
-      // TODO: need better handling
-      if (!account) return;
 
       ledgerNavigate.toDeviceBusyStep('Verifying public key on Ledger…');
       await verifyLedgerPublicKey(stacksApp);
+
       ledgerNavigate.toConnectionSuccessStep('stacks');
       await delay(1000);
       if (!unsignedTx) throw new Error('No unsigned tx');
@@ -129,11 +148,17 @@ function LedgerSignStacksTxContainer() {
           signedTx,
         });
       } catch (e) {
-        ledgerNavigate.toBroadcastErrorStep(isError(e) ? e.message : 'Unknown error');
+        ledgerNavigate.toBroadcastErrorStep(e instanceof Error ? e.message : 'Unknown error');
         return;
       }
-    },
-  });
+    } catch (e) {
+      ledgerNavigate.toDeviceDisconnectStep();
+    } finally {
+      await stacksApp.transport.close();
+    }
+  };
+
+  const allowUserToGoBack = get(location.state, 'goBack');
 
   function closeAction() {
     appEvents.publish('ledgerStacksTxSigningCancelled', { unsignedTx: unsignedTx ?? '' });
@@ -141,7 +166,7 @@ function LedgerSignStacksTxContainer() {
   }
 
   const ledgerContextValue: LedgerTxSigningContext = {
-    chain,
+    chain: 'stacks',
     transaction: unsignedTx ? deserializeTransaction(unsignedTx) : null,
     signTransaction,
     latestDeviceResponse,
@@ -150,10 +175,17 @@ function LedgerSignStacksTxContainer() {
   };
 
   return (
-    <TxSigningFlow
-      context={ledgerContextValue}
-      awaitingDeviceConnection={awaitingDeviceConnection}
-      closeAction={closeAction}
-    />
+    <LedgerTxSigningProvider value={ledgerContextValue}>
+      <BaseDrawer
+        enableGoBack={allowUserToGoBack}
+        isShowing
+        isWaitingOnPerformedAction={awaitingDeviceConnection || canUserCancelAction}
+        onClose={closeAction}
+        pauseOnClickOutside
+        waitingOnPerformedActionMessage="Ledger device in use"
+      >
+        <Outlet />
+      </BaseDrawer>
+    </LedgerTxSigningProvider>
   );
 }

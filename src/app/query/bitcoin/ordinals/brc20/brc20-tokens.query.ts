@@ -14,35 +14,53 @@ const addressesSimultaneousFetchLimit = 5;
 const stopSearchAfterNumberAddressesWithoutBrc20Tokens = 5;
 
 interface Brc20TokenResponse {
-  available_balance: string;
-  overall_balance: string;
-  tick: string;
+    limit: number;
+    offset: number;
+    total: number;
+    results: [{
+        ticker: string;
+        available_balance: string;
+        transferrable_balance: string;
+        overall_balance: string;
+    }]
 }
+
+
+
+
 
 export interface Brc20Token extends Brc20TokenResponse {
   decimals: number;
 }
 
 interface Brc20TokenTicker {
-  ticker: {
-    tick: string;
-    max_supply: string;
-    decimals: number;
-    limit_per_mint: string;
-    remaining_supply: string;
-    deploy_incr_number: number;
-  }[];
-  sales: { total_sale: string; sale_24h: string; sale_7d: string }[];
-  holders: { holders: number }[];
+token: {
+        id: string;
+        number: number;
+        block_height: number;
+        tx_id: string;
+        address: string;
+        ticker: string;
+        max_supply: string;
+        mint_limit: string
+        decimals: number;
+        deploy_timestamp: number;
+        minted_supply: string;
+        tx_count: string;
+    },
+    supply: { max_supply: string; minted_supply: string; holders: number; }
 }
 
+
+
+
 async function fetchTickerData(ticker: string): Promise<Brc20TokenTicker[]> {
-  const res = await axios.get(`https://brc20api.bestinslot.xyz/v1/get_brc20_ticker/${ticker}`);
+  const res = await axios.get(`https://bitnft.io/ordinals/v1/brc-20/tokens/${ticker}`);
   return res.data;
 }
 
 async function fetchBrc20TokensByAddress(address: string): Promise<Brc20Token[]> {
-  const res = await axios.get(`https://brc20api.bestinslot.xyz/v1/get_brc20_balance/${address}`);
+  const res = await axios.get(`https://bitnft.io/ordinals/v1/brc-20/balances/${address}`);
   const tokensData = res.data;
 
   const tickerPromises = tokensData.map((token: Brc20TokenResponse) => {

@@ -6,13 +6,14 @@ import { StacksTransactionFormValues } from '@shared/models/form.model';
 import { isEmpty } from '@shared/utils';
 
 import { useDrawers } from '@app/common/hooks/use-drawers';
+import { LoadingKeys, useLoading } from '@app/common/hooks/use-loading';
 import { useTransactionError } from '@app/features/stacks-transaction-request/hooks/use-transaction-error';
 import { Button } from '@app/ui/components/button/button';
 
 export function SubmitAction() {
-  const { handleSubmit, values, validateForm, isSubmitting } =
-    useFormikContext<StacksTransactionFormValues>();
+  const { handleSubmit, values, validateForm } = useFormikContext<StacksTransactionFormValues>();
   const { isShowingHighFeeConfirmation, setIsShowingHighFeeConfirmation } = useDrawers();
+  const { isLoading } = useLoading(LoadingKeys.SUBMIT_TRANSACTION_REQUEST);
   const error = useTransactionError();
 
   const isDisabled = !!error || Number(values.fee) < 0;
@@ -28,7 +29,7 @@ export function SubmitAction() {
 
   return (
     <Button
-      aria-busy={isSubmitting}
+      aria-busy={isLoading}
       data-testid={TransactionRequestSelectors.BtnConfirmTransaction}
       disabled={isDisabled}
       fullWidth

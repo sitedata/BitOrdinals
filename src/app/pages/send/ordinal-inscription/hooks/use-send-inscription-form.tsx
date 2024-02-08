@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { logger } from '@shared/logger';
 import { OrdinalSendFormValues } from '@shared/models/form.model';
 import { RouteUrls } from '@shared/route-urls';
-import { isError } from '@shared/utils';
 
 import { FormErrorMessages } from '@app/common/error-messages';
 import { useAnalytics } from '@app/common/hooks/analytics/use-analytics';
@@ -48,7 +47,7 @@ export function useSendInscriptionForm() {
 
         if (!resp) {
           setShowError(
-            'Insufficient funds to cover fee. Deposit some BTC to your Native Segwit address.'
+            'Insufficient funds to cover fee. Deposit some BIT to your Native Segwit address.'
           );
           return;
         }
@@ -67,7 +66,7 @@ export function useSendInscriptionForm() {
         void analytics.track('ordinals_dot_com_unavailable', { error });
 
         let message = 'Unable to establish if utxo has multiple inscriptions';
-        if (isError(error)) {
+        if (error instanceof Error) {
           message = error.message;
         }
         setShowError(message);

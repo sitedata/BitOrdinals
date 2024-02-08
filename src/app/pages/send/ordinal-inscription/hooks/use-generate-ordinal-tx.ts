@@ -23,9 +23,9 @@ export function useGenerateUnsignedOrdinalTx(inscriptionInput: UtxoWithDerivatio
   const { data: nativeSegwitUtxos } = useCurrentNativeSegwitUtxos();
 
   function coverFeeFromAdditionalUtxos(values: OrdinalSendFormValues) {
-    if (getAddressInfo(values.inscription.address).type === AddressType.p2wpkh) {
-      return formNativeSegwitOrdinalTx(values);
-    }
+//    if (getAddressInfo(values.inscription.address).type === AddressType.p2wpkh) {
+  //    return formNativeSegwitOrdinalTx(values);
+  //  }
 
     return formTaprootOrdinalTx(values);
   }

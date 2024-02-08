@@ -2,23 +2,22 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import StacksApp from '@zondax/ledger-stacks';
-import { pullStacksKeysFromLedgerDevice } from 'app/features/ledger/flows/request-stacks-keys/request-stacks-keys.utils';
-
 import { defaultWalletKeyId } from '@shared/utils';
 
-import { ledgerRequestKeysRoutes } from '@app/features/ledger/generic-flows/request-keys/ledger-request-keys-route-generator';
 import { LedgerRequestKeysContext } from '@app/features/ledger/generic-flows/request-keys/ledger-request-keys.context';
-import { RequestKeysFlow } from '@app/features/ledger/generic-flows/request-keys/request-keys-flow';
-import { useRequestLedgerKeys } from '@app/features/ledger/generic-flows/request-keys/use-request-ledger-keys';
 import { useLedgerNavigate } from '@app/features/ledger/hooks/use-ledger-navigate';
 import {
   connectLedgerStacksApp,
   getStacksAppVersion,
-  isStacksAppOpen,
+  isStacksLedgerAppClosed,
   useActionCancellableByUser,
 } from '@app/features/ledger/utils/stacks-ledger-utils';
 import { stacksKeysSlice } from '@app/store/ledger/stacks/stacks-key.slice';
+
+import { ledgerRequestKeysRoutes } from '../../generic-flows/request-keys/ledger-request-keys-route-generator';
+import { RequestKeysFlow } from '../../generic-flows/request-keys/request-keys-flow';
+import { useRequestLedgerKeys } from '../../generic-flows/request-keys/use-request-ledger-keys';
+import { pullStacksKeysFromLedgerDevice } from './request-stacks-keys.utils';
 
 function LedgerRequestStacksKeys() {
   const navigate = useNavigate();
@@ -27,14 +26,14 @@ function LedgerRequestStacksKeys() {
 
   const dispatch = useDispatch();
 
-  const chain = 'stacks';
-
   const { requestKeys, latestDeviceResponse, awaitingDeviceConnection, outdatedAppVersionWarning } =
-    useRequestLedgerKeys<StacksApp>({
-      chain,
+    useRequestLedgerKeys({
+      chain: 'stacks',
       connectApp: connectLedgerStacksApp,
       getAppVersion: getStacksAppVersion,
-      isAppOpen: isStacksAppOpen,
+      isAppOpen(resp) {
+        return !isStacksLedgerAppClosed(resp);
+      },
       onSuccess() {
         navigate('/', { replace: true });
       },
@@ -46,7 +45,7 @@ function LedgerRequestStacksKeys() {
         });
         if (resp.status === 'failure') {
           toast.error(resp.errorMessage);
-          ledgerNavigate.toErrorStep(chain, resp.errorMessage);
+          ledgerNavigate.toErrorStep(resp.errorMessage);
           return;
         }
         ledgerNavigate.toDeviceBusyStep();

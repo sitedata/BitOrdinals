@@ -5,14 +5,14 @@ import * as yup from 'yup';
 
 // ts-unused-exports:disable-next-line
 export interface Brc20TransferInscription {
-  p: 'brc-20';
+  p: 'bit-20';
   op: 'transfer';
   tick: string;
   amt: string;
 }
 
 const brc20TransferInscriptionSchema = yup.object({
-  p: yup.string().required().equals(['brc-20']),
+  p: yup.string().required().equals(['bit-20']),
   op: yup.string().required().equals(['transfer']),
   tick: yup
     .string()
@@ -31,7 +31,7 @@ function validateBrc20TransferInscription(val: unknown): val is Brc20TransferIns
 // ts-unused-exports:disable-next-line
 export function createBrc20TransferInscription(tick: string, amt: number) {
   const transfer: Brc20TransferInscription = {
-    p: 'brc-20',
+    p: 'bit-20',
     op: 'transfer',
     tick,
     amt: amt.toString(),

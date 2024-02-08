@@ -49,9 +49,9 @@ export function Brc20SendFormConfirmation() {
   const { amount, recipient, fee, tick, serviceFee, tx, orderId, feeRowValue } =
     useBrc20SendFormConfirmationState();
 
-  const summaryFeeMoney = createMoney(Number(fee), 'BTC');
+  const summaryFeeMoney = createMoney(Number(fee), 'BIT');
 
-  const serviceFeeMoney = createMoney(serviceFee, 'BTC');
+  const serviceFeeMoney = createMoney(serviceFee, 'BIT');
   const serviceFeeFormatted = formatMoneyPadded(serviceFeeMoney);
 
   const totalFee = sumMoney([summaryFeeMoney, serviceFeeMoney]);
@@ -73,7 +73,7 @@ export function Brc20SendFormConfirmation() {
 
         void analytics.track('broadcast_transaction', {
           symbol: tick,
-          type: 'brc-20',
+          type: 'bit-20',
           amount,
           fee,
           inputs: psbt.inputs.length,

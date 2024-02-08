@@ -64,10 +64,10 @@ export function useLedgerNavigate() {
         return navigate(RouteUrls.ConnectLedgerSuccess, { replace: true, state: { chain } });
       },
 
-      toErrorStep(chain: SupportedBlockchains, errorMessage?: string) {
+      toErrorStep(errorMessage?: string) {
         return navigate(RouteUrls.ConnectLedgerError, {
           replace: true,
-          state: { latestLedgerError: errorMessage, chain },
+          state: { latestLedgerError: errorMessage },
         });
       },
 

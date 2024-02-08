@@ -63,17 +63,14 @@ export function FeesRow({
   }, [feeHelper, defaultFeeValue, feeTypeHelper]);
 
   useEffect(() => {
-    if (isSponsored) {
-      void feeHelper.setValue(0);
-      return;
-    }
-
     if (!defaultFeeValue && hasFeeEstimates && !feeField.value && !isCustom) {
       void feeHelper.setValue(
         convertAmountToBaseUnit(fees.estimates[FeeTypes.Middle].fee).toString()
       );
       void feeTypeHelper.setValue(FeeTypes[FeeTypes.Middle]);
-      return;
+    }
+    if (isSponsored) {
+      void feeHelper.setValue(0);
     }
   }, [
     defaultFeeValue,

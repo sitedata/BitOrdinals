@@ -9,7 +9,6 @@ import get from 'lodash.get';
 import { finalizeMessageSignature } from '@shared/actions/finalize-message-signature';
 import { logger } from '@shared/logger';
 import { UnsignedMessage, whenSignableMessageOfType } from '@shared/signature/signature-types';
-import { isError } from '@shared/utils';
 
 import { useScrollLock } from '@app/common/hooks/use-scroll-lock';
 import { delay } from '@app/common/utils';
@@ -64,17 +63,15 @@ function LedgerSignStacksMsg({ account, unsignedMessage }: LedgerSignMsgProps) {
 
   const [awaitingDeviceConnection, setAwaitingDeviceConnection] = useState(false);
 
-  const chain = 'stacks';
-
   async function signMessage() {
     const stacksApp = await prepareLedgerDeviceStacksAppConnection({
       setLoadingState: setAwaitingDeviceConnection,
       onError(e) {
-        if (isError(e) && checkLockedDeviceError(e)) {
+        if (e instanceof Error && checkLockedDeviceError(e)) {
           setLatestDeviceResponse({ deviceLocked: true } as any);
           return;
         }
-        ledgerNavigate.toErrorStep(chain);
+        ledgerNavigate.toErrorStep();
       },
     });
 

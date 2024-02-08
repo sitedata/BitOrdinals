@@ -7,7 +7,7 @@ import { bytesToHex } from '@stacks/common';
 import { Money } from '@shared/models/money.model';
 import { RouteUrls } from '@shared/route-urls';
 import { makeRpcErrorResponse, makeRpcSuccessResponse } from '@shared/rpc/rpc-methods';
-import { closeWindow, isError } from '@shared/utils';
+import { closeWindow } from '@shared/utils';
 
 import { useAnalytics } from '@app/common/hooks/analytics/use-analytics';
 import { sumMoney } from '@app/common/money/calculate-money';
@@ -36,7 +36,7 @@ export function useRpcSignPsbt() {
   const { signPsbt, getPsbtAsTransaction } = usePsbtSigner();
   const { broadcastTx, isBroadcasting } = useBitcoinBroadcastTransaction();
   const { refetch } = useCurrentNativeSegwitUtxos();
-  const btcMarketData = useCryptoCurrencyMarketData('BTC');
+  const btcMarketData = useCryptoCurrencyMarketData('BIT');
   const calculateBitcoinFiatValue = useCalculateBitcoinFiatValue();
   const getDefaultSigningConfig = useGetAssumedZeroIndexSigningConfig();
 
@@ -78,7 +78,7 @@ export function useRpcSignPsbt() {
       },
       onError(e) {
         navigate(RouteUrls.RequestError, {
-          state: { message: isError(e) ? e.message : '', title: 'Failed to broadcast' },
+          state: { message: e instanceof Error ? e.message : '', title: 'Failed to broadcast' },
         });
       },
     });
@@ -113,7 +113,7 @@ export function useRpcSignPsbt() {
           } catch (e) {
             return navigate(RouteUrls.RequestError, {
               state: {
-                message: isError(e) ? e.message : '',
+                message: e instanceof Error ? e.message : '',
                 title: 'Failed to finalize tx',
               },
             });
@@ -130,7 +130,7 @@ export function useRpcSignPsbt() {
         closeWindow();
       } catch (e) {
         return navigate(RouteUrls.RequestError, {
-          state: { message: isError(e) ? e.message : '', title: 'Failed to sign' },
+          state: { message: e instanceof Error ? e.message : '', title: 'Failed to sign' },
         });
       }
     },

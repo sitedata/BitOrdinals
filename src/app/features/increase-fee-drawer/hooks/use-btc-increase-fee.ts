@@ -8,7 +8,6 @@ import * as yup from 'yup';
 import { createMoney } from '@shared/models/money.model';
 import { BitcoinTx } from '@shared/models/transactions/bitcoin-transaction.model';
 import { RouteUrls } from '@shared/route-urls';
-import { isError } from '@shared/utils';
 
 import { useAnalytics } from '@app/common/hooks/analytics/use-analytics';
 import { useBtcAssetBalance } from '@app/common/hooks/balance/btc/use-btc-balance';
@@ -47,7 +46,7 @@ export function useBtcIncreaseFee(btcTx: BitcoinTx) {
   const { btcAvailableAssetBalance } = useBtcAssetBalance(currentBitcoinAddress);
   const sendingAmount = getBitcoinTxValue(currentBitcoinAddress, btcTx);
   const { feesList } = useBitcoinFeesList({
-    amount: createMoney(btcToSat(sendingAmount), 'BTC'),
+    amount: createMoney(btcToSat(sendingAmount), 'BIT'),
     isSendingMax: false,
     recipient,
     utxos,
@@ -123,7 +122,7 @@ export function useBtcIncreaseFee(btcTx: BitcoinTx) {
   }
 
   function onError(error: unknown) {
-    const message = isError(error) ? error.message : 'Unknown error';
+    const message = error instanceof Error ? error.message : 'Unknown error';
     toast.error(message);
     navigate(RouteUrls.Home);
   }
