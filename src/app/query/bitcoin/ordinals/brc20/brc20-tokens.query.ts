@@ -17,12 +17,12 @@ interface Brc20TokenResponse {
     limit: number;
     offset: number;
     total: number;
-    results: [{
+    results: {
         ticker: string;
         available_balance: string;
         transferrable_balance: string;
         overall_balance: string;
-    }]
+    }[];
 }
 
 
