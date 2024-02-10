@@ -3,7 +3,7 @@ import { encodeBrc20TransferInscription } from './brc-20.utils';
 describe(encodeBrc20TransferInscription.name, () => {
   test('that it encodes the BRC-20 transfer correctly', () => {
     const result = encodeBrc20TransferInscription({
-      p: 'bit-20',
+      p: 'brc-20',
       op: 'transfer',
       tick: 'anas',
       amt: '1',
