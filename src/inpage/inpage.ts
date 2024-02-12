@@ -219,7 +219,7 @@ const provider: HiroWalletProviderOverrides = {
   getProductInfo() {
     return {
       version: VERSION,
-      name: 'Leather',
+      name: 'BitOrdinals',
       meta: {
         tag: BRANCH,
         commit: COMMIT_SHA,

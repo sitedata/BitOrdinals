@@ -56,7 +56,8 @@ interface Brc20TokenTicker {
 
 
 
-
+// bit-20 tokens are not possible unless we have access to ordinalsbot.com to send the actual indivdual tokens using their api
+// until we can come up with a solution to get listed on either ordinalsbot.com or unisat sending BIT-20 tokens is not currently possible
 
 
 
@@ -68,14 +69,16 @@ interface Brc20TokenTicker {
 async function fetchTickerData(ticker: string): Promise<Brc20TokenTicker[]> {
 //  const res = await axios.get(`https://bitnft.io/ordinals/v1/brc-20/tokens/${ticker}`);
 
-  const res = await axios.get(`http://bitexplorer.io:1717/${ticker}`);
+//  const res = await axios.get(`http://bitexplorer.io:1717/${ticker}`);
+  const res = await axios.get(``);
   return res.data;
 }
 
 async function fetchBrc20TokensByAddress(address: string): Promise<Brc20TokenResponse[]> {
 //  const res = await axios.get(`http://bitnft.io:3333/ordinals/v1/brc-20/balances/${address}`);
 
-  const res = await axios.get(`http://bitexplorer.io:1717/${address}`);
+//  const res = await axios.get(`http://bitexplorer.io:1717/${address}`);
+  const res = await axios.get(``);
   const tokensData = res.data;
 
   const tickerPromises = tokensData.map((token: Brc20TokenResponse) => {

@@ -80,7 +80,7 @@ export function WelcomePage() {
     <>
       <WelcomeLayout
         tagline="Bitnet IO for the rest of us"
-        subheader="Leather is the only Bitnet IO wallet you need to tap into the emerging Bitnet IO economy"
+        subheader="BitOrdinals Wallet is the only Bitnet IO wallet you need to tap into the emerging Bitnet IO economy"
         isGeneratingWallet={isGeneratingWallet}
         onSelectConnectLedger={onSelectConnectLedger}
         onStartOnboarding={() => startOnboarding()}

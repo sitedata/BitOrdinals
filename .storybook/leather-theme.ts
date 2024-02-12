@@ -2,8 +2,8 @@ import { create } from '@storybook/theming/create';
 
 export default create({
   base: 'dark',
-  brandTitle: 'Leather Storybook',
-  brandUrl: 'https://leather.io',
+  brandTitle: 'BitOrdinals Storybook',
+  brandUrl: 'https://bitordinals.io',
   brandImage: 'assets/images/leather.png',
   brandTarget: '_self',
 });

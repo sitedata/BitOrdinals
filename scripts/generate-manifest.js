@@ -70,9 +70,9 @@ const browserSpecificConfig = {
  */
 const manifest = {
   manifest_version: 3,
-  author: 'Leather Wallet, LLC',
+  author: 'BitOrdinals Wallet, LLC',
   description:
-    'Leather is the only Bitcoin wallet you need to tap into the emerging Bitcoin economy.',
+    'BitOrdinals is the only Bitnet IO wallet you need to tap into the emerging Bitnet IO economy.',
   permissions: ['contextMenus', 'storage'],
   commands: {
     _execute_browser_action: {
@@ -89,7 +89,7 @@ const manifest = {
   },
   web_accessible_resources: [{ resources: ['inpage.js'], matches: ['*://*/*'] }],
   action: {
-    default_title: 'Leather',
+    default_title: 'BitOrdinals',
     default_popup: 'popup.html',
     default_icon: defaultIconEnvironment[WALLET_ENVIRONMENT],
   },
@@ -107,10 +107,10 @@ const manifest = {
 };
 
 const devManifest = {
-  name: 'Leather Dev',
+  name: 'BitOrdinals Dev',
 };
 
-const name = PREVIEW_RELEASE ? 'Leather Preview' : 'Leather';
+const name = PREVIEW_RELEASE ? 'BitOrdinals Preview' : 'BitOrdinals';
 
 const prodManifest = {
   name,
