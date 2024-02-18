@@ -33,7 +33,7 @@ export function Brc20TokenAssetItemLayout({
         <ItemLayout
           flagImg={<Brc20TokenIcon />}
           titleLeft={token.tick}
-          captionLeft="BRC-20"
+          captionLeft="BIT-20"
           titleRight={
             <BasicTooltip
               asChild

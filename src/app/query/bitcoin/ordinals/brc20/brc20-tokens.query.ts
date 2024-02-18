@@ -13,77 +13,54 @@ import { useCurrentNetwork } from '@app/store/networks/networks.selectors';
 const addressesSimultaneousFetchLimit = 5;
 const stopSearchAfterNumberAddressesWithoutBrc20Tokens = 5;
 
-interface Brc20TokenResponse {
-  limit: number;
-  offset: number;
-  total: number;
-  results: {
-  ticker: string;
-  available_balance: string;
-  transferrable_balance: string;
-  overall_balance: string;
-  decimals: number;
-}[];
-
-
+export interface Brc20TokenResponse {
+  tick: string
+  available_balance: string
+  transferrable_balance: string
+  overall_balance: string
+  decimals: number
 }
+
+
+export interface Brc20Token extends Brc20TokenResponse {
+  decimals: number;
+}
+
 
 
 interface Brc20TokenTicker {
-  token: {
-  id: string;
-  number: number;
-  block_height: number;
-  tx_id: string;
-  address: string;
-  ticker: string;
-  max_supply: string;
-  mint_limit: string;
-  decimals: number;
-  deploy_timestamp: number;
-  minted_supply: string;
-  tx_count: number;
+  ticker: {
+    tick: string;
+    max_supply: string;
+    decimals: number;
+    limit_per_mint: string;
+    remaining_supply: string;
+    deploy_incr_number: number;
   }[];
-  supply: {
-  max_supply: string;
-  minted_supply: string;
-  holders: number;
-  }[];
-
-
 }
-
-
-
-
-// bit-20 tokens are not possible unless we have access to ordinalsbot.com to send the actual indivdual tokens using their api
-// until we can come up with a solution to get listed on either ordinalsbot.com or unisat sending BIT-20 tokens is not currently possible
-
-
-
-
-
 
 
 
 async function fetchTickerData(ticker: string): Promise<Brc20TokenTicker[]> {
-//  const res = await axios.get(`https://bitnft.io/ordinals/v1/brc-20/tokens/${ticker}`);
 
-//  const res = await axios.get(`http://bitexplorer.io:1717/${ticker}`);
-  const res = await axios.get(``);
+ const res = await axios.get(`https://bitnft.io/ordinals/v1/bit-20/tokens/${ticker}`);
+// const res = await axios.get(``);
+
+			//testing with port 1717
+			// const res = await axios.get(`http://bitexplorer.io:1717/fsck`);
   return res.data;
 }
 
-async function fetchBrc20TokensByAddress(address: string): Promise<Brc20TokenResponse[]> {
-//  const res = await axios.get(`http://bitnft.io:3333/ordinals/v1/brc-20/balances/${address}`);
+async function fetchBrc20TokensByAddress(address: string): Promise<Brc20Token[]> {
+  const res = await axios.get(`https://bitnft.io/ordinals/v1/bit-20/balances/${address}`);
+//  const res = await axios.get(``);
 
-//  const res = await axios.get(`http://bitexplorer.io:1717/${address}`);
-  const res = await axios.get(``);
+			// testing with port 1717
+			//  const res = await axios.get(`http://bitexplorer.io:1717/bit1p6r4nsxdnh4slwr6w9j6m0h64jnelldyh548spqy97e0gv5x4lxyqpvr9a8`);
   const tokensData = res.data;
 
   const tickerPromises = tokensData.map((token: Brc20TokenResponse) => {
-//    return fetchTickerData(token.tick);
-    return fetchTickerData(token.ticker);
+    return fetchTickerData(token.tick);
   });
 
   const tickerData = await Promise.all(tickerPromises);
@@ -96,6 +73,10 @@ async function fetchBrc20TokensByAddress(address: string): Promise<Brc20TokenRes
     };
   });
 }
+
+
+
+
 
 export function useGetBrc20TokensQuery() {
   const network = useCurrentNetwork();

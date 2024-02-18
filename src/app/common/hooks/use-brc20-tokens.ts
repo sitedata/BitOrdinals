@@ -1,4 +1,3 @@
-
 import { useGetBrc20TokensQuery } from '@app/query/bitcoin/ordinals/brc20/brc20-tokens.query';
 
 export function useBrc20Tokens() {
@@ -10,4 +9,3 @@ export function useBrc20Tokens() {
 
   return brc20Tokens;
 }
-

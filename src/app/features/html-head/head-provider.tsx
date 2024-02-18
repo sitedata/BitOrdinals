@@ -15,7 +15,7 @@ function LeatherMetaTags() {
   const suffix = process.env.WALLET_ENVIRONMENT === 'development' ? '-dev' : '';
   return (
     <>
-      <Title>BitOrdinals</Title>
+      <Title>Leather</Title>
       <Link rel="icon" href={`/assets/icons/leather-icon-128${suffix}.png`} />
     </>
   );
