@@ -16,7 +16,7 @@ export function LeatherIntroDialog({ children }: HasChildren) {
   return (
     <Dialog.Root defaultOpen>
       <Dialog.Content
-        // Prevent immediate closing, force interaction
+        // Prevent immediate closing, force interation
         onEscapeKeyDown={e => e.preventDefault()}
         onInteractOutside={e => e.preventDefault()}
         className={css({ maxWidth: '500px', backgroundColor: 'accent.background-primary' })}

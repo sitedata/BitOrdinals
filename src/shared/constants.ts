@@ -1,5 +1,6 @@
 import { ChainID } from '@stacks/transactions';
 
+import { IS_TEST_ENV } from './environment';
 import { Blockchains } from './models/blockchain.model';
 
 export const gaiaUrl = 'https://hub.blockstack.org';
@@ -23,15 +24,17 @@ export const BIT_P2WPKH_DUST_AMOUNT = 294;
 
 export const KEBAB_REGEX = /[A-Z\u00C0-\u00D6\u00D8-\u00DE]/g;
 
+export const MICROBLOCKS_ENABLED = !IS_TEST_ENV && true;
+
 export const GITHUB_ORG = 'leather-wallet';
 export const GITHUB_REPO = 'extension';
 
 export enum WalletDefaultNetworkConfigurationIds {
   mainnet = 'mainnet',
-//  testnet = 'testnet',
-//  signet = 'signet',
-//  sbtcDevenv = 'sbtcDevenv',
-//  devnet = 'devnet',
+  testnet = 'testnet',
+  signet = 'signet',
+  sbtcDevenv = 'sbtcDevenv',
+  devnet = 'devnet',
 }
 
 export type DefaultNetworkConfigurations = keyof typeof WalletDefaultNetworkConfigurationIds;
@@ -40,7 +43,7 @@ const supportedBlockchains = ['stacks', 'bitcoin'] as const;
 
 export type SupportedBlockchains = (typeof supportedBlockchains)[number];
 
-const networkModes = ['mainnet'] as const;
+const networkModes = ['mainnet', 'testnet'] as const;
 
 export type NetworkModes = (typeof networkModes)[number];
 
@@ -77,13 +80,12 @@ export interface NetworkConfiguration {
 }
 
 export const HIRO_API_BASE_URL_MAINNET = 'https://bitnft.io';
-export const HIRO_API_BASE_URL_TESTNET = 'https://bitnft.io';
+export const HIRO_API_BASE_URL_TESTNET = 'https://api.testnet.hiro.so';
 export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscriptions';
 
 export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitexplorer.io/api';
-//export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitexplorer.io/api';
-export const BITCOIN_API_BASE_URL_TESTNET = 'https://bitexplorer.io/api';
-const BITCOIN_API_BASE_URL_SIGNET = 'https://bitexplorer.io/api';
+export const BITCOIN_API_BASE_URL_TESTNET = 'https://blockstream.info/testnet/api';
+const BITCOIN_API_BASE_URL_SIGNET = 'https://mempool.space/signet/api';
 
 const networkMainnet: NetworkConfiguration = {
   id: WalletDefaultNetworkConfigurationIds.mainnet,
@@ -138,7 +140,7 @@ const networkSignet: NetworkConfiguration = {
 
 const networkSbtcDevenv: NetworkConfiguration = {
   id: WalletDefaultNetworkConfigurationIds.sbtcDevenv,
-  name: 'sBIT Devenv',
+  name: 'sBTC Devenv',
   chain: {
     stacks: {
       blockchain: 'stacks',

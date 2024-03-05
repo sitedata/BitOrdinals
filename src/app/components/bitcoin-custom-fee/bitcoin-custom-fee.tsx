@@ -16,7 +16,7 @@ import { TextInputField } from '../text-input-field';
 import { BitcoinCustomFeeFiat } from './bitcoin-custom-fee-fiat';
 import { useBitcoinCustomFee } from './hooks/use-bitcoin-custom-fee';
 
-const feeInputLabel = 'sats/vB';
+const feeInputLabel = 'radiowaves/vB';
 
 interface BitcoinCustomFeeProps {
   amount: number;

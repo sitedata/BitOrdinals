@@ -1,29 +1,47 @@
-import { styled } from 'leather-styles/jsx';
+import { Flex, FlexProps, styled } from 'leather-styles/jsx';
 
-import { StacksFungibleTokenAssetBalance } from '@shared/models/crypto-asset-balance.model';
+import type { Money } from '@shared/models/money.model';
 
+import { formatBalance } from '@app/common/format-balance';
+import { ftDecimals } from '@app/common/stacks-utils';
 import { StacksAssetAvatar } from '@app/components/crypto-assets/stacks/components/stacks-asset-avatar';
-import { ItemInteractive } from '@app/ui/components/item/item-interactive';
-import { ItemLayout } from '@app/ui/components/item/item.layout';
+import { usePressable } from '@app/components/item-hover';
+import { Flag } from '@app/components/layout/flag';
 import { BasicTooltip } from '@app/ui/components/tooltip/basic-tooltip';
 
-import { parseStacksFungibleTokenAssetBalance } from './fungible-token-asset.utils';
+import { AssetCaption } from '../../components/asset-caption';
+import { AssetRowGrid } from '../../components/asset-row-grid';
 
-interface StacksFungibleTokenAssetItemLayoutProps {
-  assetBalance: StacksFungibleTokenAssetBalance;
+interface StacksFungibleTokenAssetItemLayoutProps extends FlexProps {
+  avatar: string;
+  balance: Money;
+  caption: string;
+  imageCanonicalUri?: string;
+  isPressable?: boolean;
+  title: string;
   onClick?(): void;
 }
 export function StacksFungibleTokenAssetItemLayout({
-  assetBalance,
+  avatar,
+  balance,
+  caption,
+  imageCanonicalUri,
+  isPressable,
+  title,
   onClick,
 }: StacksFungibleTokenAssetItemLayoutProps) {
-  const { amount, avatar, caption, dataTestId, formattedBalance, imageCanonicalUri, title } =
-    parseStacksFungibleTokenAssetBalance(assetBalance);
+  const [component, bind] = usePressable(isPressable);
+
+  const amount = balance.decimals
+    ? ftDecimals(balance.amount, balance.decimals || 0)
+    : balance.amount.toString();
+  const formattedBalance = formatBalance(amount);
 
   return (
-    <ItemInteractive data-testid={dataTestId} onClick={onClick}>
-      <ItemLayout
-        flagImg={
+    <Flex onClick={isPressable ? onClick : undefined} {...bind}>
+      <Flag
+        align="middle"
+        img={
           <StacksAssetAvatar
             color="white"
             gradientString={avatar}
@@ -32,20 +50,22 @@ export function StacksFungibleTokenAssetItemLayout({
             {title[0]}
           </StacksAssetAvatar>
         }
-        titleLeft={title}
-        captionLeft={caption}
-        titleRight={
-          <BasicTooltip
-            asChild
-            label={formattedBalance.isAbbreviated ? amount : undefined}
-            side="left"
-          >
-            <styled.span data-testid={title} fontWeight={500} textStyle="label.02">
-              {formattedBalance.value}
-            </styled.span>
-          </BasicTooltip>
-        }
-      />
-    </ItemInteractive>
+        spacing="space.04"
+        width="100%"
+      >
+        <AssetRowGrid
+          title={<styled.span textStyle="label.01">{title}</styled.span>}
+          balance={
+            <BasicTooltip label={formattedBalance.isAbbreviated ? amount : undefined} side="left">
+              <styled.span data-testid={title} textStyle="label.01">
+                {formattedBalance.value}
+              </styled.span>
+            </BasicTooltip>
+          }
+          caption={<AssetCaption caption={caption} />}
+        />
+        {component}
+      </Flag>
+    </Flex>
   );
 }

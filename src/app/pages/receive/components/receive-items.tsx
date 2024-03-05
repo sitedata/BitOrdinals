@@ -13,7 +13,7 @@ export function ReceiveItemList({ children, title }: ReceiveItemListProps) {
         </styled.span>
       )}
       <Divider mt="space.02" color="accent.border-default" />
-      <Stack mb="space.08" mt="space.05">
+      <Stack gap="space.05" mb="space.08" mt="space.05">
         {children}
       </Stack>
     </>

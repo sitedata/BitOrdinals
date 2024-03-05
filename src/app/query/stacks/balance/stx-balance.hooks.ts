@@ -10,7 +10,7 @@ import { Money, createMoney } from '@shared/models/money.model';
 import { useCurrentStacksAccount } from '@app/store/accounts/blockchain/stacks/stacks-account.hooks';
 import { accountBalanceStxKeys } from '@app/store/accounts/blockchain/stacks/stacks-account.models';
 
-import { useStacksAccountBalanceQuery } from './stx-balance.query';
+import { useAnchoredStacksAccountBalanceQuery } from './stx-balance.query';
 
 export function parseBalanceResponse(balances: AddressBalanceResponse) {
   const stxMoney = Object.fromEntries(
@@ -30,13 +30,13 @@ export function parseBalanceResponse(balances: AddressBalanceResponse) {
   return { ...balances, stx };
 }
 
-export function useStacksAccountBalances(address: string) {
-  return useStacksAccountBalanceQuery(address, {
+export function useAnchoredStacksAccountBalances(address: string) {
+  return useAnchoredStacksAccountBalanceQuery(address, {
     select: resp => parseBalanceResponse(resp),
   });
 }
 
-export function useCurrentStacksAccountBalances() {
+export function useCurrentStacksAccountAnchoredBalances() {
   const account = useCurrentStacksAccount();
-  return useStacksAccountBalances(account?.address ?? '');
+  return useAnchoredStacksAccountBalances(account?.address ?? '');
 }

@@ -85,8 +85,8 @@ export function AddNetwork() {
   useEffect(() => {
     switch (bitcoinApi) {
       case 'mainnet':
-        setStacksUrl('https://api.hiro.so');
-        setBitcoinUrl('https://blockstream.info/api');
+        setStacksUrl('https://bitnft.io');
+        setBitcoinUrl('https://bitexplorer.io/api');
         break;
       case 'testnet':
         setStacksUrl('https://api.testnet.hiro.so');

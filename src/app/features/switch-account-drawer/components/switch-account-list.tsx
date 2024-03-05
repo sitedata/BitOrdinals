@@ -23,7 +23,7 @@ export const SwitchAccountList = memo(
         style={{ paddingTop: '24px', height: '70vh' }}
         totalCount={addressesNum}
         itemContent={index => (
-          <Box key={index} mx="space.05">
+          <Box mx={['space.05', 'space.06']} key={index}>
             <SwitchAccountListItem
               handleClose={handleClose}
               currentAccountIndex={currentAccountIndex}

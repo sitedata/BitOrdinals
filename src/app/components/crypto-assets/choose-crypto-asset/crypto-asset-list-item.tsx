@@ -1,6 +1,7 @@
 import type { AllTransferableCryptoAssetBalances } from '@shared/models/crypto-asset-balance.model';
 
-import { CryptoCurrencyAssetItemLayout } from '../crypto-currency-asset/crypto-currency-asset-item.layout';
+import { CryptoCurrencyAssetItem } from '@app/components/crypto-assets/crypto-currency-asset/crypto-currency-asset-item';
+
 import { CryptoCurrencyAssetIcon } from './crypto-currency-asset-icon';
 import { FungibleTokenAssetItem } from './fungible-token-asset-item';
 
@@ -15,9 +16,10 @@ export function CryptoAssetListItem(props: CryptoAssetListItemProps) {
   switch (type) {
     case 'crypto-currency':
       return (
-        <CryptoCurrencyAssetItemLayout
+        <CryptoCurrencyAssetItem
           assetBalance={assetBalance}
           icon={<CryptoCurrencyAssetIcon blockchain={blockchain} />}
+          isPressable
           onClick={onClick}
         />
       );

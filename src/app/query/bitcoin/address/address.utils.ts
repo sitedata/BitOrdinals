@@ -15,7 +15,7 @@ export function createBitcoinCryptoCurrencyAssetTypeWrapper(
       decimals: BIT_DECIMALS,
       hasMemo: true,
       name: 'Bitnet IO',
-      symbol: 'BIT',
+      symbol: 'BTC',
     },
     type: 'crypto-currency',
   };

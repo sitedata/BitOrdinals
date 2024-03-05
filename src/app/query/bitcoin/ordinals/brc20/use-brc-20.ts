@@ -16,7 +16,7 @@ export function useBrc20FeatureFlag() {
   const ordinalsbotConfig = useConfigOrdinalsbot();
 
   if (!ordinalsbotConfig.integrationEnabled) {
-    return { enabled: false, reason: 'BIT-20 transfers are temporarily disabled' } as const;
+    return { enabled: false, reason: 'BRC-20 transfers are temporarily disabled' } as const;
   }
 
   const supportedNetwork =

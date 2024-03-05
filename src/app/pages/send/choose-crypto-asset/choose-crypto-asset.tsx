@@ -26,7 +26,7 @@ export function ChooseCryptoAsset() {
 
   function navigateToSendForm(cryptoAssetBalance: AllTransferableCryptoAssetBalances) {
     const { asset } = cryptoAssetBalance;
-    if (asset.symbol === 'BTC' && !isBitcoinSendEnabled) {
+    if (asset.symbol === 'BIT' && !isBitcoinSendEnabled) {
       return navigate(RouteUrls.SendBtcDisabled);
     }
     const symbol = asset.symbol === '' ? asset.contractAssetName : asset.symbol.toLowerCase();
@@ -38,9 +38,9 @@ export function ChooseCryptoAsset() {
         return navigate('..');
       }
       const contractId = `${asset.contractId.split('::')[0]}`;
-      return navigate(`${RouteUrls.SendCryptoAsset}/btc/${contractId}`);
+      return navigate(`${RouteUrls.SendCryptoAsset}/${symbol}/${contractId}`);
     }
-    navigate(`${RouteUrls.SendCryptoAsset}/btc`);
+    navigate(`${RouteUrls.SendCryptoAsset}/${symbol}`);
   }
 
   return (

@@ -55,7 +55,7 @@ export function makeStacksTxExplorerLink({
   suffix = '',
   txid,
 }: MakeStacksTxExplorerLinkArgs) {
-  return `https://explorer.hiro.so/txid/${txid}?chain=${mode}${suffix}`;
+  return `https://explorer.bitnft.io/txid/${txid}?chain=${mode}${suffix}`;
 }
 
 export function makeBitcoinTxExplorerLink({
@@ -65,7 +65,7 @@ export function makeBitcoinTxExplorerLink({
   switch (bitcoinNetwork) {
     case 'mainnet':
     case 'testnet':
-      return `https://bitexplorer.io/${
+      return `https://mempool.space/${
         bitcoinNetwork !== 'mainnet' ? bitcoinNetwork + '/' : ''
       }tx/${txid}`;
     case 'regtest':

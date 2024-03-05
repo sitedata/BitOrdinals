@@ -34,6 +34,8 @@ export function FiatProvidersList(props: FiatProvidersProps) {
     switch (symbol) {
       case 'BIT':
         return RouteUrls.ReceiveBtc;
+      case 'STX':
+        return RouteUrls.ReceiveStx;
     }
   }, [symbol]);
 

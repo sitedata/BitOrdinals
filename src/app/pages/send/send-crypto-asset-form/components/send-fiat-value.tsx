@@ -15,7 +15,7 @@ interface SendFiatInputProps {
   assetSymbol?: string;
 }
 
-export function SendFiatValue({ marketData, assetSymbol = 'BIT' }: SendFiatInputProps) {
+export function SendFiatValue({ marketData, assetSymbol = '' }: SendFiatInputProps) {
   const [field] = useField('amount');
   const [assetValue, setAssetValue] = useState<Money>(createMoneyFromDecimal(0, assetSymbol));
 

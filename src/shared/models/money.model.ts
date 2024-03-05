@@ -18,7 +18,7 @@ export interface Money {
 export const currencyDecimalsMap = {
   BIT: BIT_DECIMALS,
   STX: STX_DECIMALS,
-  USD: 8,
+  USD: 2,
 } as const;
 
 type KnownCurrencyDecimals = keyof typeof currencyDecimalsMap;

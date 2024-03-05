@@ -20,7 +20,7 @@ import { Caption } from '@app/ui/components/typography/caption';
 import { useBtcIncreaseFee } from '../hooks/use-btc-increase-fee';
 import { IncreaseFeeActions } from './increase-fee-actions';
 
-const feeInputLabel = 'sats/vB';
+const feeInputLabel = 'radiowaves/vB';
 
 interface IncreaseBtcFeeFormProps {
   btcTx: BitcoinTx;
@@ -50,7 +50,7 @@ export function IncreaseBtcFeeForm({ btcTx }: IncreaseBtcFeeFormProps) {
       validationSchema={validationSchema}
     >
       <Stack gap="space.06">
-        {btcTx && <BitcoinTransactionItem transaction={btcTx} />}
+        {btcTx && <BitcoinTransactionItem position="relative" transaction={btcTx} zIndex={99} />}
         <Stack gap="space.04">
           <Stack gap="space.01">
             <TextInputField label={feeInputLabel} name="feeRate" placeholder={feeInputLabel} />

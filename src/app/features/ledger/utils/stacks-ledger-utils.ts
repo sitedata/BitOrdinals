@@ -49,7 +49,7 @@ export async function getStacksAppVersion(app: StacksApp) {
   if (resp.errorMessage !== 'No errors') {
     throw new Error(resp.errorMessage);
   }
-  return { name: 'Stacks', ...resp };
+  return { name: 'BitStacks', ...resp };
 }
 
 export const prepareLedgerDeviceStacksAppConnection = prepareLedgerDeviceForAppFn(

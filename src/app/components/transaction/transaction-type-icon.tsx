@@ -7,10 +7,11 @@ import { TransactionTypeIconWrapper } from './transaction-type-icon-wrapper';
 
 type StatusColorMap = Record<StacksTxStatus, string>;
 
-function getColorFromTx(tx: StacksTx) {
+export function getColorFromTx(tx: StacksTx) {
   const colorMap: StatusColorMap = {
     pending: 'warning.label',
-    success: 'stacks',
+    success_microblock: 'stacks',
+    success_anchor_block: 'stacks',
     failed: 'error.label',
   };
 

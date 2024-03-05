@@ -16,8 +16,8 @@ const tenStx = createMoneyFromDecimal(10, 'STX');
 const tenBtc = createMoneyFromDecimal(10, 'BIT');
 
 const mockWrongMarketData = {
-  pair: createMarketPair('BIT' as any, 'USDT'),
-  price: createMoneyFromDecimal(1, 'EUR' as any, 8),
+  pair: createMarketPair('BIT' as any, 'USD'),
+  price: createMoneyFromDecimal(1, 'EUR' as any, 2),
 } as MarketData;
 
 const mockAccurateStxMarketData = createMarketData(

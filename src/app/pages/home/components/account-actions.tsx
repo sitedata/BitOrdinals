@@ -41,6 +41,7 @@ export function AccountActions(props: FlexProps) {
         onClick={() => navigate(receivePath, { state: { backgroundLocation: location } })}
       />
 
+
     </Flex>
   );
 }

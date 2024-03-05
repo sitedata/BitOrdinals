@@ -36,12 +36,12 @@ export function ReceiveModal({ type = 'full' }: ReceiveModalProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const btcAddressNativeSegwit = useCurrentAccountNativeSegwitAddressIndexZero();
-//  const stxAddress = useCurrentAccountStxAddressState();
+  const stxAddress = useCurrentAccountStxAddressState();
   const accountIndex = get(location.state, 'accountIndex', undefined);
   const btcAddressTaproot = useZeroIndexTaprootAddress(accountIndex);
 
   const { onCopy: onCopyBtc } = useClipboard(btcAddressNativeSegwit);
-//  const { onCopy: onCopyStx } = useClipboard(stxAddress);
+  const { onCopy: onCopyStx } = useClipboard(stxAddress);
   const { onCopy: onCopyOrdinal } = useClipboard(btcAddressTaproot);
 
   function copyToClipboard(copyHandler: () => void, tracker = 'copy_address_to_clipboard') {
@@ -86,6 +86,18 @@ export function ReceiveModal({ type = 'full' }: ReceiveModalProps) {
                 }
                 title="Bitnet IO"
               />
+              <ReceiveItem
+                address={stxAddress}
+                icon={<StxAvatar />}
+                dataTestId={HomePageSelectors.ReceiveStxQrCodeBtn}
+                onCopyAddress={() => copyToClipboard(onCopyStx)}
+                onClickQrCode={() =>
+                  navigate(`${RouteUrls.Home}${RouteUrls.ReceiveStx}`, {
+                    state: { backgroundLocation, btcAddressTaproot },
+                  })
+                }
+                title="BitStacks"
+              />
             </ReceiveItemList>
           )}
           <ReceiveItemList title={type === 'full' ? 'Collectibles' : undefined}>
@@ -106,6 +118,17 @@ export function ReceiveModal({ type = 'full' }: ReceiveModalProps) {
                 });
               }}
               title="BitOrdinal inscription"
+            />
+            <ReceiveItem
+              address={stxAddress}
+              icon={<StxAvatar />}
+              onCopyAddress={() => copyToClipboard(onCopyStx, 'select_nft_to_add_new_collectible')}
+              onClickQrCode={() =>
+                navigate(`${RouteUrls.Home}${RouteUrls.ReceiveStx}`, {
+                  state: { backgroundLocation },
+                })
+              }
+              title="BitStacks NFT"
             />
           </ReceiveItemList>
         </Box>

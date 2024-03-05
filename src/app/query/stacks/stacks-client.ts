@@ -7,6 +7,7 @@ import {
   FeesApi,
   FungibleTokensApi,
   InfoApi,
+  MicroblocksApi,
   NamesApi,
   NonFungibleTokensApi,
   RosettaApi,
@@ -21,6 +22,7 @@ export class StacksClient {
   accountsApi: AccountsApi;
   infoApi: InfoApi;
   transactionsApi: TransactionsApi;
+  microblocksApi: MicroblocksApi;
   blocksApi: BlocksApi;
   faucetsApi: FaucetsApi;
   namesApi: NamesApi;
@@ -36,6 +38,7 @@ export class StacksClient {
     this.accountsApi = new AccountsApi(this.configuration);
     this.infoApi = new InfoApi(this.configuration);
     this.transactionsApi = new TransactionsApi(this.configuration);
+    this.microblocksApi = new MicroblocksApi(this.configuration);
     this.blocksApi = new BlocksApi(this.configuration);
     this.faucetsApi = new FaucetsApi(this.configuration);
     this.namesApi = new NamesApi(this.configuration);

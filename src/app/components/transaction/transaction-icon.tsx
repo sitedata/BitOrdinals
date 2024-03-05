@@ -18,6 +18,8 @@ export function TransactionIcon(props: { tx: StacksTx }) {
       return <TokenTransferIcon tx={tx} />;
     case 'contract_call':
       return <FunctionIcon />;
+    case 'poison_microblock':
+      return null;
     default:
       return null;
   }

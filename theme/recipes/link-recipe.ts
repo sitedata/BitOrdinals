@@ -6,7 +6,11 @@ export const linkRecipe = defineRecipe({
   className: 'link',
   jsx: ['Link'],
   base: {
+    _disabled: {
+      cursor: 'not-allowed',
+    },
     appearance: 'none',
+    color: 'accent.text-primary',
     display: 'inline',
     mb: 'space.01',
     p: 'unset',
@@ -44,6 +48,12 @@ export const linkRecipe = defineRecipe({
           },
           color: 'accent.text-primary',
         },
+        _disabled: {
+          _before: {
+            background: 'accent.non-interactive',
+          },
+          color: 'accent.non-interactive',
+        },
         _focus: {
           _before: { background: 'focus' },
           color: 'accent.text-primary',
@@ -54,7 +64,6 @@ export const linkRecipe = defineRecipe({
             background: 'accent.action-primary-hover',
           },
         },
-        color: 'accent.text-primary',
       },
 
       text: {
@@ -75,6 +84,13 @@ export const linkRecipe = defineRecipe({
           color: 'accent.text-primary',
           visibility: 'visible',
         },
+        _disabled: {
+          _before: {
+            background: 'accent.non-interactive',
+            visibility: 'visible',
+          },
+          color: 'accent.non-interactive',
+        },
         _focus: {
           _before: {
             background: 'focus',
@@ -89,13 +105,12 @@ export const linkRecipe = defineRecipe({
             visibility: 'visible',
           },
         },
-        color: 'accent.text-primary',
       },
     },
 
     // TODO: Remove invert code
     invert: { true: {} },
-    disabled: { true: {} },
+
     fullWidth: { true: { width: '100%' } },
   },
 
@@ -107,6 +122,8 @@ export const linkRecipe = defineRecipe({
   // TODO: Remove invert code
   compoundVariants: [
     {
+      variant: 'underlined',
+      invert: true,
       css: {
         _focus: {
           _before: {
@@ -123,43 +140,6 @@ export const linkRecipe = defineRecipe({
         },
         color: 'accent.background-secondary',
       },
-      invert: true,
-      variant: 'underlined',
-    },
-    {
-      css: {
-        _before: {
-          content: '""',
-          background: 'accent.non-interactive',
-          bottom: '-2px',
-          height: '2px',
-          left: 0,
-          position: 'absolute',
-          right: 0,
-        },
-        color: 'accent.non-interactive',
-        cursor: 'not-allowed',
-      },
-      disabled: true,
-      variant: 'underlined',
-    },
-    {
-      css: {
-        _before: {
-          content: '""',
-          background: 'accent.non-interactive',
-          bottom: '-2px',
-          height: '2px',
-          left: 0,
-          position: 'absolute',
-          right: 0,
-          visibility: 'visible',
-        },
-        color: 'accent.non-interactive',
-        cursor: 'not-allowed',
-      },
-      disabled: true,
-      variant: 'text',
     },
   ],
 });

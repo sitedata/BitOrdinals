@@ -241,7 +241,7 @@ export function useBitcoinContracts() {
       txMoney,
       txFiatValue,
       txFiatValueSymbol,
-      symbol: 'BIT',
+      symbol: 'BTC',
       txLink,
     };
   }

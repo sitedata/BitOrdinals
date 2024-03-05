@@ -17,8 +17,7 @@ export interface Stamp {
 }
 
 async function fetchStampsByAddress(address: string): Promise<Stamp[]> {
-//  const resp = await axios.get(`https://stampchain.io/api/stamps?wallet_address=${address}`);
-  const resp = await axios.get(``);
+  const resp = await axios.get(`https://stampchain.io/api/stamps?wallet_address=${address}`);
   return resp.data;
 }
 

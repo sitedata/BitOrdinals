@@ -6,5 +6,9 @@ interface TransactionListLayoutProps {
   children: ReactNode;
 }
 export function TransactionListLayout({ children }: TransactionListLayoutProps) {
-  return <Stack pb="space.06">{children}</Stack>;
+  return (
+    <Stack pb="space.06" gap="space.06">
+      {children}
+    </Stack>
+  );
 }

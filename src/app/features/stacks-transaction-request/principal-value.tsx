@@ -11,7 +11,7 @@ export function PrincipalValue(props: PrincipalValueProps) {
 
   return (
     <Link
-      onClick={() => openInNewTab(`https://explorer.hiro.so/address/${address}?chain=${mode}`)}
+      onClick={() => openInNewTab(`https://explorer.bitnft.io/address/${address}?chain=${mode}`)}
       size="sm"
       variant="text"
       wordBreak="break-all"

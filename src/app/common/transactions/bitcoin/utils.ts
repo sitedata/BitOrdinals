@@ -1,6 +1,5 @@
 import BigNumber from 'bignumber.js';
 import { getAddressInfo, validate } from 'bitcoin-address-validation';
-//import { getAddressInfo, validate } from 'repository';
 
 import { BIT_P2WPKH_DUST_AMOUNT } from '@shared/constants';
 import {

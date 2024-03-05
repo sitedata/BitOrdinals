@@ -12,7 +12,7 @@ export function stxRecipientValidator(
   currentAddress: string,
   currentNetwork: NetworkConfiguration
 ) {
-  return stxAddressValidator(FormErrorMessages.InvalidAddress)
-    .concat(stxAddressNetworkValidator(currentNetwork))
-    .concat(notCurrentAddressValidator(currentAddress || ''));
+//  return stxAddressValidator(FormErrorMessages.InvalidAddress)
+//    .concat(stxAddressNetworkValidator(currentNetwork))
+//    .concat(notCurrentAddressValidator(currentAddress || ''));
 }

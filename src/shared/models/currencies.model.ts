@@ -1,4 +1,4 @@
-const CRYPTO_CURRENCIES_ARRAY = ['BIT', 'BIT'] as const;
+const CRYPTO_CURRENCIES_ARRAY = ['BIT', 'STX'] as const;
 
 export type CryptoCurrencies = (typeof CRYPTO_CURRENCIES_ARRAY)[number];
 

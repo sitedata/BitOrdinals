@@ -53,7 +53,7 @@ const browserSpecificConfig = {
     },
     browser_specific_settings: {
       gecko: {
-        id: '{e22ae397-03d7-4622-bd8f-ecaca8c9b277}',
+        id: '{e22ae397-03d7-4622-bd8f-ecaca8c9b999}',
       },
     },
   },
@@ -70,9 +70,9 @@ const browserSpecificConfig = {
  */
 const manifest = {
   manifest_version: 3,
-  author: 'BitOrdinals Wallet, LLC',
+  author: 'Leather Wallet, LLC',
   description:
-    'BitOrdinals is the only Bitnet IO wallet you need to tap into the emerging Bitnet IO economy.',
+    'Leather is the only Bitcoin wallet you need to tap into the emerging Bitcoin economy.',
   permissions: ['contextMenus', 'storage'],
   commands: {
     _execute_browser_action: {
@@ -89,7 +89,7 @@ const manifest = {
   },
   web_accessible_resources: [{ resources: ['inpage.js'], matches: ['*://*/*'] }],
   action: {
-    default_title: 'BitOrdinals',
+    default_title: 'Leather',
     default_popup: 'popup.html',
     default_icon: defaultIconEnvironment[WALLET_ENVIRONMENT],
   },

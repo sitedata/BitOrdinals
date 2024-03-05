@@ -1,7 +1,6 @@
 import { BitcoinTx } from '@shared/models/transactions/bitcoin-transaction.model';
 
-import { BasicTooltip } from '@app/ui/components/tooltip/basic-tooltip';
-import { Caption } from '@app/ui/components/typography/caption';
+import { PendingLabel } from '@app/components/transaction/pending-label';
 
 interface BitcoinTransactionStatusProps {
   transaction: BitcoinTx;
@@ -11,9 +10,5 @@ const pendingWaitingMessage =
 
 export function BitcoinTransactionStatus({ transaction }: BitcoinTransactionStatusProps) {
   const isPending = !transaction.status.confirmed;
-  return isPending ? (
-    <BasicTooltip asChild label={pendingWaitingMessage} side="bottom">
-      <Caption color="warning.label">Pending</Caption>
-    </BasicTooltip>
-  ) : null;
+  return isPending ? <PendingLabel pendingWaitingMessage={pendingWaitingMessage} /> : null;
 }

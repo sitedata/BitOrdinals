@@ -3,6 +3,7 @@ import { RecipientDropdownLayout } from './components/recipient-dropdown.layout'
 
 export enum RecipientFieldType {
   Address,
+  BnsName,
 }
 
 interface RecipientTypeDropdownProps {
@@ -22,6 +23,11 @@ export function RecipientTypeDropdown(props: RecipientTypeDropdownProps) {
     >
       <RecipientDropdownItem
         index={RecipientFieldType.Address}
+        isVisible={isVisible}
+        onSelectItem={onSelectItem}
+      />
+      <RecipientDropdownItem
+        index={RecipientFieldType.BnsName}
         isVisible={isVisible}
         onSelectItem={onSelectItem}
       />

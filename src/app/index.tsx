@@ -22,7 +22,7 @@ setDebugOnGlobal();
 
 declare global {
   interface Window {
-//    __APP_VERSION__: string;
+    __APP_VERSION__: string;
   }
 }
 

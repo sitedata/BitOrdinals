@@ -2,9 +2,9 @@ import { styled } from 'leather-styles/jsx';
 
 import { useStxBalance } from '@app/common/hooks/balance/stx/use-stx-balance';
 import { ftDecimals } from '@app/common/stacks-utils';
-import { CryptoCurrencyAssetItemLayout } from '@app/components/crypto-assets/crypto-currency-asset/crypto-currency-asset-item.layout';
+import { CryptoCurrencyAssetItem } from '@app/components/crypto-assets/crypto-currency-asset/crypto-currency-asset-item';
 import { StxAvatar } from '@app/components/crypto-assets/stacks/components/stx-avatar';
-import { useStacksFungibleTokenAssetBalancesWithMetadata } from '@app/query/stacks/balance/stacks-ft-balances.hooks';
+import { useStacksFungibleTokenAssetBalancesAnchoredWithMetadata } from '@app/query/stacks/balance/stacks-ft-balances.hooks';
 import { StacksAccount } from '@app/store/accounts/blockchain/stacks/stacks-account.models';
 import { BulletOperator } from '@app/ui/components/bullet-separator/bullet-separator';
 import { Caption } from '@app/ui/components/typography/caption';
@@ -15,7 +15,9 @@ interface StacksAssetListProps {
   account: StacksAccount;
 }
 export function StacksAssetList({ account }: StacksAssetListProps) {
-  const stacksFtAssetBalances = useStacksFungibleTokenAssetBalancesWithMetadata(account.address);
+  const stacksFtAssetBalances = useStacksFungibleTokenAssetBalancesAnchoredWithMetadata(
+    account.address
+  );
 
   const { stxEffectiveBalance, stxEffectiveUsdBalance, stxLockedBalance, stxUsdLockedBalance } =
     useStxBalance();
@@ -36,7 +38,7 @@ export function StacksAssetList({ account }: StacksAssetListProps) {
 
   return (
     <>
-      <CryptoCurrencyAssetItemLayout
+      <CryptoCurrencyAssetItem
         assetBalance={stxEffectiveBalance}
         usdBalance={stxEffectiveUsdBalance}
         address={account.address}

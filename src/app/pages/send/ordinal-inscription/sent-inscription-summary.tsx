@@ -51,7 +51,7 @@ export function SendInscriptionSummary() {
   const analytics = useAnalytics();
 
   function onClickLink() {
-    void analytics.track('view_transaction_confirmation', { symbol: 'BIT' });
+    void analytics.track('view_transaction_confirmation', { symbol: 'BTC' });
     handleOpenTxLink(txLink);
   }
 
@@ -66,7 +66,7 @@ export function SendInscriptionSummary() {
         <InscriptionPreviewCard
           icon={<CheckmarkIcon mt="space.01" size="32px" />}
           image={<InscriptionPreview inscription={inscription} />}
-          subtitle="BitOrdinal inscription"
+          subtitle="Ordinal inscription"
           title={inscription.title}
         />
       </Box>

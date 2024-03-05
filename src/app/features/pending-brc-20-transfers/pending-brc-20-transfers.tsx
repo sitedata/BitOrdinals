@@ -6,6 +6,7 @@ import { RouteUrls } from '@shared/route-urls';
 import { noop } from '@shared/utils';
 
 import { usePressable } from '@app/components/item-hover';
+import { Flag } from '@app/components/layout/flag';
 import { StatusPending } from '@app/components/status-pending';
 import { StatusReady } from '@app/components/status-ready';
 import { useNativeSegwitBalance } from '@app/query/bitcoin/balance/btc-native-segwit-balance.hooks';
@@ -20,7 +21,6 @@ import {
   usePendingBrc20Transfers,
 } from '@app/store/ordinals/ordinals.slice';
 import { BulletSeparator } from '@app/ui/components/bullet-separator/bullet-separator';
-import { Flag } from '@app/ui/components/flag/flag';
 import { BasicTooltip } from '@app/ui/components/tooltip/basic-tooltip';
 import { Caption } from '@app/ui/components/typography/caption';
 
@@ -73,7 +73,7 @@ export function PendingBrc20TransferList() {
   return (
     <Flex flexDirection="column" justifyContent="space-between" flex={1} my="space.04">
       <Flex columnGap="8px">
-        <Caption>Pending BIT-20 transfers</Caption>
+        <Caption>Pending BRC-20 transfers</Caption>
       </Flex>
       <Stack mt="space.02">
         {transferOrders.map(order => (
@@ -130,7 +130,12 @@ function PendingBrcTransfer({ order }: PendingBrcTransferProps) {
       <HStack width="100%" mt="space.02">
         <BulletSeparator>
           <Flex>
-            <Flag ml="space.02" spacing="space.02" img={<StatusIcon status={order.status} />}>
+            <Flag
+              ml="space.02"
+              align="middle"
+              spacing="space.02"
+              img={<StatusIcon status={order.status} />}
+            >
               <StatusLabel status={order.status} />
             </Flag>
           </Flex>

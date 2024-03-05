@@ -1,5 +1,7 @@
 import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
 
+import { BoxProps, styled } from 'leather-styles/jsx';
+
 import { StacksTx, TxTransferDetails } from '@shared/models/transactions/stacks-transaction.model';
 import { RouteUrls } from '@shared/route-urls';
 
@@ -14,6 +16,7 @@ import {
 import { useWalletType } from '@app/common/use-wallet-type';
 import { whenPageMode } from '@app/common/utils';
 import { openIndexPageInNewTab } from '@app/common/utils/open-in-new-tab';
+import { usePressable } from '@app/components/item-hover';
 import { TransactionTitle } from '@app/components/transaction/transaction-title';
 import { useCurrentStacksAccount } from '@app/store/accounts/blockchain/stacks/stacks-account.hooks';
 import { useRawTxIdState } from '@app/store/transactions/raw.hooks';
@@ -23,14 +26,16 @@ import { IncreaseFeeButton } from './increase-fee-button';
 import { StacksTransactionIcon } from './stacks-transaction-icon';
 import { StacksTransactionStatus } from './stacks-transaction-status';
 
-interface StacksTransactionItemProps {
+interface StacksTransactionItemProps extends BoxProps {
   transferDetails?: TxTransferDetails;
   transaction?: StacksTx;
 }
 export function StacksTransactionItem({
   transferDetails,
   transaction,
+  ...rest
 }: StacksTransactionItemProps) {
+  const [component, bind, { isHovered }] = usePressable(true);
   const { handleOpenStacksTxLink: handleOpenTxLink } = useStacksExplorerLink();
   const currentAccount = useCurrentStacksAccount();
   const analytics = useAnalytics();
@@ -78,21 +83,32 @@ export function StacksTransactionItem({
   const increaseFeeButton = (
     <IncreaseFeeButton
       isEnabled={isOriginator && isPending}
+      isHovered={isHovered}
       isSelected={pathname === RouteUrls.IncreaseStxFee}
       onIncreaseFee={onIncreaseFee}
     />
   );
   const txStatus = transaction && <StacksTransactionStatus transaction={transaction} />;
+  const txCaption = (
+    <styled.span color="accent.text-subdued" textStyle="caption.02" whiteSpace="nowrap">
+      {caption}
+    </styled.span>
+  );
+  const txValue = <styled.span textStyle="label.02">{value}</styled.span>;
 
   return (
     <TransactionItemLayout
       openTxLink={openTxLink}
-      rightElement={isOriginator && isPending ? increaseFeeButton : undefined}
-      txCaption={caption}
+      txCaption={txCaption}
       txIcon={txIcon}
       txStatus={txStatus}
       txTitle={<TransactionTitle title={title} />}
-      txValue={value}
-    />
+      txValue={txValue}
+      belowCaptionEl={increaseFeeButton}
+      {...bind}
+      {...rest}
+    >
+      {component}
+    </TransactionItemLayout>
   );
 }

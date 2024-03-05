@@ -9,6 +9,10 @@ const nameMap: Record<CryptoCurrencies, { name: string; symbol: string }> = {
     name: 'Bitnet IO',
     symbol: 'BIT',
   },
+  STX: {
+    name: 'BitStacks',
+    symbol: 'STX',
+  },
 };
 
 interface FundLayoutProps extends HasChildren {

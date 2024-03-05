@@ -54,7 +54,7 @@ export function useAlexSwap() {
         return {
           ...swapAsset,
           balance: availableStxBalance,
-          displayName: 'Stacks',
+          displayName: 'BitStacks',
         };
       }
 

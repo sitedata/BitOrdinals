@@ -13,13 +13,15 @@ import { useRefreshAllAccountData } from '@app/common/hooks/account/use-refresh-
 import { useStxBalance } from '@app/common/hooks/balance/stx/use-stx-balance';
 import { microStxToStx, stxToMicroStx } from '@app/common/money/unit-conversion';
 import { stacksValue } from '@app/common/stacks-utils';
+import { useWalletType } from '@app/common/use-wallet-type';
 import { safelyFormatHexTxid } from '@app/common/utils/safe-handle-txid';
 import { stxFeeValidator } from '@app/common/validation/forms/fee-validators';
 import { LoadingSpinner } from '@app/components/loading-spinner';
 import { StacksTransactionItem } from '@app/components/stacks-transaction-item/stacks-transaction-item';
-import { useStacksBroadcastTransaction } from '@app/features/stacks-transaction-request/hooks/use-stacks-broadcast-transaction';
-import { useCurrentStacksAccountBalances } from '@app/query/stacks/balance/stx-balance.hooks';
+import { useLedgerNavigate } from '@app/features/ledger/hooks/use-ledger-navigate';
+import { useCurrentStacksAccountAnchoredBalances } from '@app/query/stacks/balance/stx-balance.hooks';
 import { useSubmittedTransactionsActions } from '@app/store/submitted-transactions/submitted-transactions.hooks';
+import { useReplaceByFeeSoftwareWalletSubmitCallBack } from '@app/store/transactions/fees.hooks';
 import { useRawDeserializedTxState, useRawTxIdState } from '@app/store/transactions/raw.hooks';
 import { Caption } from '@app/ui/components/typography/caption';
 
@@ -32,11 +34,13 @@ export function IncreaseStxFeeForm() {
   const tx = useSelectedTx();
   const navigate = useNavigate();
   const [, setTxId] = useRawTxIdState();
-  const { data: balances } = useCurrentStacksAccountBalances();
+  const replaceByFee = useReplaceByFeeSoftwareWalletSubmitCallBack();
+  const { data: balances } = useCurrentStacksAccountAnchoredBalances();
   const { availableBalance } = useStxBalance();
   const submittedTransactionsActions = useSubmittedTransactionsActions();
   const rawTx = useRawDeserializedTxState();
-  const { stacksBroadcastTransaction } = useStacksBroadcastTransaction('STX');
+  const { whenWallet } = useWalletType();
+  const ledgerNavigate = useLedgerNavigate();
 
   const fee = Number(rawTx?.auth.spendingCondition?.fee);
 
@@ -54,9 +58,24 @@ export function IncreaseStxFeeForm() {
       const txId = tx.tx_id || safelyFormatHexTxid(rawTx.txid());
       await refreshAccountData();
       submittedTransactionsActions.transactionReplacedByFee(txId);
-      await stacksBroadcastTransaction(rawTx);
+      await whenWallet({
+        software: async () => {
+          await replaceByFee(rawTx);
+        },
+        ledger: () => {
+          ledgerNavigate.toConnectAndSignStacksTransactionStep(rawTx);
+        },
+      })();
     },
-    [tx, rawTx, refreshAccountData, submittedTransactionsActions, stacksBroadcastTransaction]
+    [
+      tx,
+      rawTx,
+      refreshAccountData,
+      submittedTransactionsActions,
+      whenWallet,
+      replaceByFee,
+      ledgerNavigate,
+    ]
   );
 
   if (!tx || !fee) return <LoadingSpinner />;
@@ -74,7 +93,7 @@ export function IncreaseStxFeeForm() {
     >
       {props => (
         <Stack gap="space.06">
-          {tx && <StacksTransactionItem transaction={tx} />}
+          {tx && <StacksTransactionItem position="relative" transaction={tx} zIndex={99} />}
           <Stack gap="space.04">
             <IncreaseFeeField currentFee={fee} />
             {balances?.stx.unlockedStx.amount && (

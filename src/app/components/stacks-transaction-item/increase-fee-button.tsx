@@ -4,12 +4,13 @@ import { ChevronsRightIcon } from '@app/ui/components/icons/chevrons-right-icon'
 
 interface IncreaseFeeButtonProps {
   isEnabled?: boolean;
+  isHovered: boolean;
   isSelected: boolean;
   onIncreaseFee(): void;
 }
 export function IncreaseFeeButton(props: IncreaseFeeButtonProps) {
-  const { isEnabled, isSelected, onIncreaseFee } = props;
-  const isActive = isEnabled && !isSelected;
+  const { isEnabled, isHovered, isSelected, onIncreaseFee } = props;
+  const isActive = isEnabled && isHovered && !isSelected;
 
   return (
     <styled.button
@@ -26,7 +27,7 @@ export function IncreaseFeeButton(props: IncreaseFeeButtonProps) {
       position="relative"
       px="space.02"
       py="space.01"
-      rounded="xs"
+      rounded="8px"
       type="button"
       zIndex={999}
     >

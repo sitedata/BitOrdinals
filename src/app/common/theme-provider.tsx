@@ -28,7 +28,7 @@ const ThemeContext = createContext<{
   setUserSelectedTheme(theme: UserSelectedTheme): void;
 }>({
   // These values are not used, but are set to satisfy the context's value type.
-  theme: 'dark',
+  theme: 'light',
   userSelectedTheme: 'system',
   setUserSelectedTheme: noop,
 });
