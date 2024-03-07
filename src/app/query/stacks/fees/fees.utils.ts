@@ -11,8 +11,8 @@ import {
 } from '@shared/models/fees/stacks-fees.model';
 import { Money, createMoney } from '@shared/models/money.model';
 
-const defaultFeesMaxValues = [1000000, 1000000, 1000000];
-const defaultFeesMinValues = [2500, 3000, 3500];
+const defaultFeesMaxValues = [2000000, 2000000, 2000000];
+const defaultFeesMinValues = [1500000, 1500000, 1500000];
 
 export const defaultFeesMaxValuesAsMoney = [
   createMoney(defaultFeesMaxValues[0], 'STX'),

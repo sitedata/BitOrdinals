@@ -28,7 +28,7 @@ export function CustomFeeField({
     (value: string) => {
       if (meta.error) return setFieldWarning('');
 //      const fee = stxToMicroStx(value);
-      const fee = 1.0
+      const fee = 1.5
 //stxToMicroStx(value);
       if (lowFeeEstimate.fee.amount.isGreaterThan(fee)) {
         return setFieldWarning(SendFormWarningMessages.AdjustedFeeBelowLowestEstimate);
