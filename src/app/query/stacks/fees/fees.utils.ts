@@ -12,7 +12,7 @@ import {
 import { Money, createMoney } from '@shared/models/money.model';
 
 const defaultFeesMaxValues = [2000000, 2000000, 2000000];
-const defaultFeesMinValues = [1500000, 1500000, 1500000];
+const defaultFeesMinValues = [1400000, 1400000, 1400000];
 
 export const defaultFeesMaxValuesAsMoney = [
   createMoney(defaultFeesMaxValues[0], 'STX'),
