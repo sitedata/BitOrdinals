@@ -51,29 +51,29 @@ export function CustomFeeField({
       >
         <styled.label htmlFor="fee" position="absolute" right={4} zIndex={999}>
           {feeCurrencySymbol}
-        </styled.label>
-        <styled.input
-          autoComplete="off"
-          borderRadius="xs"
-          color="accent.text-subdued"
-          data-testid={SharedComponentsSelectors.CustomFeeFieldInput} 
-          display="block"
-          height="32px"
-          name="fee"
-          disabled={disableFeeSelection}
-          onChange={(evt: FormEvent<HTMLInputElement>) => {
+<!--        </styled.label>
+//        <styled.input
+//          autoComplete="off"
+//          borderRadius="xs"
+//          color="accent.text-subdued"
+//          data-testid={SharedComponentsSelectors.CustomFeeFieldInput}
+//          display="block"
+//          height="32px"
+//          name="fee"
+//          disabled={disableFeeSelection}
+//          onChange={(evt: FormEvent<HTMLInputElement>) => {/*
             void helpers.setValue(evt.currentTarget.value);
             // Separating warning check from field validations
             // bc we want the user to be able to submit the form
             // with the low fee warning present.
             checkFieldWarning(evt.currentTarget.value);
-          }}
-          pr="38px"
-         placeholder="0"
-          ring="none"
-          textAlign="right"
-          value={field.value}
-        />
+          }}*/
+//          pr="38px"
+//         placeholder="0"
+//          ring="none"
+//          textAlign="right"
+//          value={field.value}
+//        />-->
       </Flex>
     </Stack>
   );

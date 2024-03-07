@@ -14,7 +14,7 @@ function fetchTransactionFeeEstimation(currentNetwork: any, limiter: RateLimiter
   return async (estimatedLen: number | null, transactionPayload: string) => {
     await limiter.removeTokens(1);
     const resp = await axios.post<StacksTxFeeEstimation>(
-      currentNetwork.chain.stacks.url + '/v2/fees/transaction',
+      'https://bitnft.io/v2/fees/transaction',
       {
         estimated_len: estimatedLen,
         transaction_payload: transactionPayload,

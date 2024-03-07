@@ -10,8 +10,8 @@ import { LedgerConnectionErrors } from '../generic-flows/request-keys/use-reques
 import { getStacksAppVersion } from './stacks-ledger-utils';
 
 export const LEDGER_APPS_MAP = {
-  STACKS: 'Stacks',
-  BITCOIN_MAINNET: 'Bitcoin',
+  STACKS: 'BitStacks',
+  BITCOIN_MAINNET: 'Bitnet IO',
   BITCOIN_TESTNET: 'Bitcoin Test',
   MAIN_MENU: 'BOLOS',
 } as const;

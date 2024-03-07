@@ -9,7 +9,7 @@ import { BasicTooltip } from '@app/ui/components/tooltip/basic-tooltip';
 
 const feesInfo =
   'Higher fees increase the likelihood of your transaction getting confirmed before others. Click to learn more.';
-const url = 'https://hiro.so/questions/fee-estimates';
+//const url = 'https://hiro.so/questions/fee-estimates';
 
 interface FeesRowLayoutProps extends HstackProps {
   feeField: React.JSX.Element;
@@ -30,7 +30,7 @@ export function FeesRowLayout(props: FeesRowLayoutProps) {
               <styled.span color="accent.text-subdued" textStyle="label.02">
                 Fee
               </styled.span>
-              <InfoIcon color="accent.text-subdued" onClick={() => openInNewTab(url)} size="xs" />
+             <InfoIcon color="accent.text-subdued" /*onClick={() => openInNewTab(url)}*/ size="xs" />
             </HStack>
           </BasicTooltip>
           {!isSponsored ? selectInput : null}

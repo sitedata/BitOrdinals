@@ -73,7 +73,7 @@ export const getTxValue = (tx: StacksTx, isOriginator: boolean): number | string
 export const getTxTitle = (tx: StacksTx) => {
   switch (tx.tx_type) {
     case 'token_transfer':
-      return 'Stacks';
+      return 'BitStacks';
     case 'contract_call':
       return tx.contract_call.function_name;
     case 'smart_contract':
