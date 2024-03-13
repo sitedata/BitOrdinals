@@ -84,26 +84,6 @@ export function WelcomeLayout({
             >
               Use existing key
             </Button>
-            <Link
-              hideBelow="md"
-              invert={isAtleastBreakpointMd}
-              flex={1}
-              mt={[0, 0, 'space.05']}
-              onClick={onSelectConnectLedger}
-              size="lg"
-            >
-              Use Ledger
-            </Link>
-            <Button
-              hideFrom="md"
-              variant="outline"
-              invert={isAtleastBreakpointMd}
-              flex={1}
-              mt={[0, 0, 'space.05']}
-              onClick={onSelectConnectLedger}
-            >
-              Use Ledger
-            </Button>
           </Flex>
         </Flex>
       </Flex>

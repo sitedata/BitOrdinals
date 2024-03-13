@@ -1,6 +1,7 @@
 export enum RouteUrls {
   // Onboarding routes
-  RequestDiagnostics = '/get-started/request-diagnostics',
+//  RequestDiagnostics = '/get-started/request-diagnostics',
+  RequestDiagnostics = '/get-started',
   Onboarding = '/get-started',
   BackUpSecretKey = '/back-up-secret-key',
   SetPassword = '/set-password',
