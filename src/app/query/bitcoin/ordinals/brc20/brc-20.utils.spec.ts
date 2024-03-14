@@ -1,9 +1,9 @@
 import { encodeBrc20TransferInscription } from './brc-20.utils';
 
 describe(encodeBrc20TransferInscription.name, () => {
-  test('that it encodes the BRC-20 transfer correctly', () => {
+  test('that it encodes the BIT-20 transfer correctly', () => {
     const result = encodeBrc20TransferInscription({
-      p: 'brc-20',
+      p: 'bit-20',
       op: 'transfer',
       tick: 'anas',
       amt: '1',

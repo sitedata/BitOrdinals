@@ -30,7 +30,7 @@ class AddressApi {
 
   async getUtxosByAddress(address: string): Promise<UtxoResponseItem[]> {
     const resp = await axios.get<UtxoResponseItem[]>(
-      `https://bitnft.io/api/address/${address}/utxo`
+      `https://bitexplorer.io/api/address/${address}/utxo`
     );
     return resp.data.sort((a, b) => a.vout - b.vout);
   }
@@ -71,7 +71,7 @@ class FeeEstimatesApi {
 
   async getFeeEstimatesFromBlockcypherApi(network: string): Promise<FeeResult> {
     const resp = await axios.get<FeeEstimateEarnApiResponse>(
-      `https://bitexplorer.io/api/v1/fees/recommended`
+      `https://mempool.space/api/v1/fees/recommended`
     );
 const { fastestFee, halfHourFee, hourFee } = resp.data;
     return {

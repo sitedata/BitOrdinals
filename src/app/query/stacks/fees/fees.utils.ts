@@ -11,10 +11,8 @@ import {
 } from '@shared/models/fees/stacks-fees.model';
 import { Money, createMoney } from '@shared/models/money.model';
 
-
 const defaultFeesMaxValues = [2000000, 2000000, 2000000];
 const defaultFeesMinValues = [1400000, 1400000, 1400000];
-
 
 export const defaultFeesMaxValuesAsMoney = [
   createMoney(defaultFeesMaxValues[0], 'STX'),
@@ -89,7 +87,6 @@ export function getDefaultSimulatedFeeEstimations(
   estimatedByteLength: number
 ): StacksFeeEstimate[] {
   const fee = calculateFeeFromFeeRate(estimatedByteLength, DEFAULT_FEE_RATE);
-//calculateFeeFromFeeRate(estimatedByteLength, DEFAULT_FEE_RATE);
   return [
     {
       fee: createMoney(fee.multipliedBy(1 - marginFromDefaultFeeDecimalPercent), 'STX'),

@@ -66,7 +66,7 @@ export function SendInscriptionSummary() {
         <InscriptionPreviewCard
           icon={<CheckmarkIcon mt="space.01" size="32px" />}
           image={<InscriptionPreview inscription={inscription} />}
-          subtitle="Ordinal inscription"
+          subtitle="BitOrdinal inscription"
           title={inscription.title}
         />
       </Box>

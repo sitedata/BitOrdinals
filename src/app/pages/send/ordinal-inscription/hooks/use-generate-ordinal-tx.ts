@@ -1,5 +1,5 @@
 import * as btc from '@scure/btc-signer';
-import { AddressType, getAddressInfo } from 'bitcoin-address-validation';
+//import { AddressType, getAddressInfo } from 'bitcoin-address-validation';
 
 import { extractAddressIndexFromPath } from '@shared/crypto/bitcoin/bitcoin.utils';
 import { BitcoinInputSigningConfig } from '@shared/crypto/bitcoin/signer-config';
@@ -23,9 +23,9 @@ export function useGenerateUnsignedOrdinalTx(inscriptionInput: UtxoWithDerivatio
   const { data: nativeSegwitUtxos } = useCurrentNativeSegwitUtxos();
 
   function coverFeeFromAdditionalUtxos(values: OrdinalSendFormValues) {
-    if (getAddressInfo(values.inscription.address).type === AddressType.p2wpkh) {
-      return formNativeSegwitOrdinalTx(values);
-    }
+//    if (getAddressInfo(values.inscription.address).type === AddressType.p2wpkh) {
+//      return formNativeSegwitOrdinalTx(values);
+//    }
 
     return formTaprootOrdinalTx(values);
   }

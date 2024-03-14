@@ -73,7 +73,7 @@ export function PendingBrc20TransferList() {
   return (
     <Flex flexDirection="column" justifyContent="space-between" flex={1} my="space.04">
       <Flex columnGap="8px">
-        <Caption>Pending BRC-20 transfers</Caption>
+        <Caption>Pending BIT-20 transfers</Caption>
       </Flex>
       <Stack mt="space.02">
         {transferOrders.map(order => (

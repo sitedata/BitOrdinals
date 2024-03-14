@@ -1,4 +1,4 @@
-import { validate } from 'bitcoin-address-validation';
+//import { validate } from 'bitcoin-address-validation';
 
 import { UtxoResponseItem } from '@app/query/bitcoin/bitcoin-client';
 

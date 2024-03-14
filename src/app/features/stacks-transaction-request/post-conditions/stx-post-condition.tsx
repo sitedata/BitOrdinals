@@ -17,7 +17,7 @@ export function StxPostCondition(): React.JSX.Element | null {
       icon="STX"
       amount={stacksValue({ value: pendingTransaction.amount, withTicker: false })}
       ticker="STX"
-      left="BitStacks Token"
+      left="Stacks Token"
       right={
         pendingTransaction.txType === TransactionTypes.STXTransfer
           ? `To ${truncateMiddle(pendingTransaction.recipient, 4)}`

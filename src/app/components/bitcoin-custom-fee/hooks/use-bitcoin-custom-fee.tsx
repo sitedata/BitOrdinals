@@ -12,7 +12,7 @@ import { useCurrentNativeSegwitUtxos } from '@app/query/bitcoin/address/utxos-by
 import { useCurrentNativeSegwitAddressBalance } from '@app/query/bitcoin/balance/btc-native-segwit-balance.hooks';
 import { useCryptoCurrencyMarketData } from '@app/query/common/market-data/market-data.hooks';
 
-export const MAX_FEE_RATE_MULTIPLIER = 50;
+export const MAX_FEE_RATE_MULTIPLIER = 50000;
 
 interface UseBitcoinCustomFeeArgs {
   amount: Money;

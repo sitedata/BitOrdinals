@@ -25,7 +25,7 @@ export function ReceiveOrdinalModal() {
       address={state.btcAddressTaproot}
       onCopyAddressToClipboard={copyToClipboard}
       title="ORD. INSCRIPTION"
-      warning={<ReceiveBtcModalWarning message="Deposit only Ordinal inscriptions here" />}
+      warning={<ReceiveBtcModalWarning message="Deposit only BitOrdinal inscriptions here" />}
     />
   );
 }

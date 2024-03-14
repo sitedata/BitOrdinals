@@ -46,7 +46,7 @@ export function SendInscriptionReview() {
       async onSuccess(txid: string) {
         void analytics.track('broadcast_ordinal_transaction');
         await refetch();
-        // Might be a BRC-20 transfer, so we want to remove it from the pending
+        // Might be a BIT-20 transfer, so we want to remove it from the pending
         dispatch(inscriptionSent({ inscriptionId: inscription.id }));
         navigate(`/${RouteUrls.SendOrdinalInscription}/${RouteUrls.SendOrdinalInscriptionSent}`, {
           state: {
@@ -69,7 +69,7 @@ export function SendInscriptionReview() {
       <Box px="space.06" mt="space.06">
         <InscriptionPreviewCard
           image={<InscriptionPreview inscription={inscription} />}
-          subtitle="Ordinal inscription"
+          subtitle="BitOrdinal inscription"
           title={inscription.title}
         />
       </Box>

@@ -88,7 +88,7 @@ export function BitcoinTransactionItem({ transaction, ...rest }: BitcoinTransact
   );
   const txValue = <BitcoinTransactionValue>{value}</BitcoinTransactionValue>;
 
-  const title = inscriptionData ? `Ordinal inscription #${inscriptionData.number}` : 'Bitnet IO';
+  const title = inscriptionData ? `BitOrdinal inscription #${inscriptionData.number}` : 'Bitnet IO';
   const increaseFeeButton = (
     <IncreaseFeeButton
       isEnabled={isEnabled}

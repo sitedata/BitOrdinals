@@ -19,7 +19,7 @@ export function Brc20TokenAssetItem({
   return (
     <Brc20TokenAssetItemLayout
       balance={createMoney(Number(token.overall_balance), token.tick, 0)}
-      caption="BRC-20"
+      caption="BIT-20"
       title={token.tick}
       isPressable={isPressable}
       onClick={onClick}

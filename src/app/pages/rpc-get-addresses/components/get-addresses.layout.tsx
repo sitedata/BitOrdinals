@@ -32,7 +32,7 @@ export function GetAddressesLayout(props: GetAddressesLayoutProps) {
           <Button onClick={() => onUserApproveGetAddresses()} fullWidth>
             <Flex justifyContent="center" alignItems="center">
               <LeatherLIcon mr="space.02" />
-              <styled.span textStyle="label.02">Connect Leather</styled.span>
+              <styled.span textStyle="label.02">Connect BitOrdinals</styled.span>
             </Flex>
           </Button>
         </Box>

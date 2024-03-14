@@ -32,7 +32,7 @@ export async function wrappedFetch(input: RequestInfo, init: RequestInit = {}) {
 }
 
 axios.interceptors.request.use(request => {
-  if (request.url?.includes('hiro.so'))
+  if (request.url?.includes('bitnft.io'))
     Object.entries(leatherHeaders).forEach(([key, value]) => request.headers.set(key, value));
 
   return request;

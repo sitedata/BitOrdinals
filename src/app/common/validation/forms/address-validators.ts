@@ -1,4 +1,4 @@
-import { AddressType, Network, getAddressInfo, validate } from 'bitcoin-address-validation';
+//import { AddressType, Network, getAddressInfo, validate } from 'bitcoin-address-validation';
 import * as yup from 'yup';
 
 import { BitcoinNetworkModes, NetworkConfiguration } from '@shared/constants';
@@ -9,7 +9,7 @@ import { FormErrorMessages } from '@app/common/error-messages';
 import { validateAddressChain, validateStacksAddress } from '@app/common/stacks-utils';
 
 function notCurrentAddressValidatorFactory(currentAddress: string) {
-  return (value: unknown) => value !== currentAddress;
+//  return (value: unknown) => value !== currentAddress;
 }
 
 export function notCurrentAddressValidator(currentAddress: string) {

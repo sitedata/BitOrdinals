@@ -17,7 +17,7 @@ import { formatInsufficientBalanceError, formatPrecisionError } from '../../erro
 import { FormErrorMessages } from '../../error-messages';
 import { currencyAmountValidator, stxAmountPrecisionValidator } from './currency-validators';
 
-const minSpendAmountInSats = 6000;
+const minSpendAmountInSats = 100;
 
 function amountValidator() {
   return yup

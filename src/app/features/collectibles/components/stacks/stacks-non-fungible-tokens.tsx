@@ -17,10 +17,10 @@ export function StacksNonFungibleTokens({ metadata }: StacksNonFungibleTokensPro
 
   return (
     <CollectibleImage
-      alt="bitstacks nft"
+      alt="stacks nft"
       icon={<StxIcon size="lg" />}
       src={metadata.cached_image ?? ''}
-      subtitle="BitStacks NFT"
+      subtitle="Stacks NFT"
       title={metadata.name ?? ''}
     />
   );

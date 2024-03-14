@@ -84,7 +84,7 @@ export function Brc20SentSummary() {
         <HStack gap="sapce.04" width="100%">
           <InfoCardBtn
             icon={<ExternalLinkIcon size="14px" />}
-            label="Pending BRC-20 transfers"
+            label="Pending BIT-20 transfers"
             onClick={onClickLink}
           />
         </HStack>

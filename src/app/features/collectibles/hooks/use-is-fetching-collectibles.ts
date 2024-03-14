@@ -8,7 +8,7 @@ function areAnyQueriesFetching(...args: number[]) {
 }
 
 export function useIsFetchingCollectiblesRelatedQuery() {
-  // Ordinal inscriptions
+  // BitOrdinal inscriptions
   const n1 = useIsFetching([QueryPrefixes.TaprootAddressUtxos]);
   const n2 = useIsFetching([QueryPrefixes.InscriptionsByAddress]);
   const n3 = useIsFetching([QueryPrefixes.InscriptionMetadata]);

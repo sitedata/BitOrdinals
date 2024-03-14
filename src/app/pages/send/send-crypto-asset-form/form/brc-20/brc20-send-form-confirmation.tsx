@@ -73,7 +73,7 @@ export function Brc20SendFormConfirmation() {
 
         void analytics.track('broadcast_transaction', {
           symbol: tick,
-          type: 'brc-20',
+          type: 'bit-20',
           amount,
           fee,
           inputs: psbt.inputs.length,

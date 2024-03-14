@@ -24,7 +24,7 @@ export function StxTransferItem({ stxTransfer, parentTx }: StxTransferItemProps)
 
   const caption = getTxCaption(parentTx.tx) ?? '';
   const icon = isOriginator ? <ArrowUpIcon size="xs" /> : <ArrowDownIcon size="xs" />;
-  const title = 'BitStacks Token Transfer';
+  const title = 'Stacks Token Transfer';
   const value = `${isOriginator ? '-' : ''}${stacksValue({
     value: stxTransfer.amount,
     withTicker: false,

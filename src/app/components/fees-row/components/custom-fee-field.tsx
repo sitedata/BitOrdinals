@@ -27,10 +27,8 @@ export function CustomFeeField({
   const checkFieldWarning = useCallback(
     (value: string) => {
       if (meta.error) return setFieldWarning('');
-      const fee = stxToMicroStx(value);
-//      const fee = 1.400
-
-//stxToMicroStx(value);
+//      const fee = stxToMicroStx(value);
+      const fee = 1.400;
       if (lowFeeEstimate.fee.amount.isGreaterThan(fee)) {
         return setFieldWarning(SendFormWarningMessages.AdjustedFeeBelowLowestEstimate);
       }
@@ -57,7 +55,7 @@ export function CustomFeeField({
           autoComplete="off"
           borderRadius="xs"
           color="accent.text-subdued"
-          data-testid={SharedComponentsSelectors.CustomFeeFieldInput} 
+          data-testid={SharedComponentsSelectors.CustomFeeFieldInput}
           display="block"
           height="32px"
           name="fee"
@@ -70,7 +68,7 @@ export function CustomFeeField({
             checkFieldWarning(evt.currentTarget.value);
           }}
           pr="38px"
-         placeholder="0"
+          placeholder="0"
           ring="none"
           textAlign="right"
           value={field.value}

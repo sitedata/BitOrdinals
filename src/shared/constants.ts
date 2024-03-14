@@ -8,7 +8,7 @@ export const gaiaUrl = 'https://hub.blockstack.org';
 export const POPUP_CENTER_WIDTH = 442;
 export const POPUP_CENTER_HEIGHT = 646;
 
-export const HIGH_FEE_AMOUNT_STX = 2;
+export const HIGH_FEE_AMOUNT_STX = 5;
 export const HIGH_FEE_WARNING_LEARN_MORE_URL_BIT = 'https://bitcoinfees.earn.com/';
 export const HIGH_FEE_WARNING_LEARN_MORE_URL_STX = 'https://hiro.so/questions/fee-estimates';
 
@@ -85,7 +85,7 @@ export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscript
 
 export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitexplorer.io/api';
 export const BITCOIN_API_BASE_URL_TESTNET = 'https://blockstream.info/testnet/api';
-const BITCOIN_API_BASE_URL_SIGNET = 'https://mempool.space/signet/api';
+const BITCOIN_API_BASE_URL_SIGNET = 'https://bitexplorer.io/signet/api';
 
 const networkMainnet: NetworkConfiguration = {
   id: WalletDefaultNetworkConfigurationIds.mainnet,
