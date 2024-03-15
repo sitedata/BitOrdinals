@@ -86,7 +86,7 @@ export function AddNetwork() {
     switch (bitcoinApi) {
       case 'mainnet':
         setStacksUrl('https://bitnft.io');
-        setBitcoinUrl('https://bitexplorer.io/api');
+        setBitcoinUrl('https://bitnft.io/api');
         break;
       case 'testnet':
         setStacksUrl('https://api.testnet.hiro.so');

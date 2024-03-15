@@ -83,7 +83,7 @@ export const HIRO_API_BASE_URL_MAINNET = 'https://bitnft.io';
 export const HIRO_API_BASE_URL_TESTNET = 'https://api.testnet.hiro.so';
 export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscriptions';
 
-export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitexplorer.io/api';
+export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitnft.io/api';
 export const BITCOIN_API_BASE_URL_TESTNET = 'https://blockstream.info/testnet/api';
 const BITCOIN_API_BASE_URL_SIGNET = 'https://bitexplorer.io/signet/api';
 

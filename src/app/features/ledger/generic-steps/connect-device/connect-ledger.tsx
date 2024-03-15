@@ -50,7 +50,7 @@ export function ConnectLedger(props: ConnectLedgerProps) {
     return [
       '1. Connect & unlock your Ledger',
       `2. Open${showBitcoinConnectButton ? ' Bitcoin' : ''} ${showBothBtns ? 'or' : ''} ${
-        showStacksConnectButton ? 'Stacks' : ''
+        showStacksConnectButton ? 'BitStacks' : ''
       } app`,
       '3. Click the button below',
     ];

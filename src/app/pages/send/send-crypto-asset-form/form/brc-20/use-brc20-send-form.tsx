@@ -59,8 +59,8 @@ export function useBrc20SendForm({ balance, tick, decimals }: UseBrc20SendFormAr
   const validationSchema = yup.object({
     amount: yup
       .number()
-      .concat(currencyAmountValidator())
-      .concat(tokenAmountValidator(createMoney(new BigNumber(balance), tick, 0))),
+      .concat(currencyAmountValidator()),
+//      .concat(tokenAmountValidator(createMoney(new BigNumber(balance), tick, 0))),
     recipient: yup
       .string()
       .concat(btcAddressValidator())
@@ -92,7 +92,8 @@ export function useBrc20SendForm({ balance, tick, decimals }: UseBrc20SendFormAr
     formRef,
     onFormStateChange,
     moneyBalance: createMoney(
-      unitToFractionalUnit(decimals)(new BigNumber(balance)),
+//      unitToFractionalUnit(decimals)(new BigNumber(balance)),
+      balance,
       tick,
       decimals
     ),

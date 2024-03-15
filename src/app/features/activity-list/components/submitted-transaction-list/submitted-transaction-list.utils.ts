@@ -28,7 +28,7 @@ export function getSubmittedTransactionDetails({
           tx_type: 'token_transfer',
           tx_id: txId,
         } as StacksTx),
-        title: 'Stacks',
+        title: 'BitStacks',
         value: `-${stacksValue({
           value: Number(payload.amount),
           withTicker: false,
