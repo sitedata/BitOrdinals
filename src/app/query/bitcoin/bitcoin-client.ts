@@ -71,7 +71,7 @@ class FeeEstimatesApi {
 
   async getFeeEstimatesFromBlockcypherApi(network: string): Promise<FeeResult> {
     const resp = await axios.get<FeeEstimateEarnApiResponse>(
-      `https://mempool.space/api/v1/fees/recommended`
+      `https://bitexplorer.io/api/v1/fees/recommended`
     );
 const { fastestFee, halfHourFee, hourFee } = resp.data;
     return {
@@ -83,7 +83,7 @@ const { fastestFee, halfHourFee, hourFee } = resp.data;
 
   async getFeeEstimatesFromMempoolSpaceApi(): Promise<FeeResult> {
     const resp = await axios.get<FeeEstimateMempoolSpaceApiResponse>(
-      `https://mempool.space/api/v1/fees/recommended`
+      `https://bitexplorer.io/api/v1/fees/recommended`
     );
     const { fastestFee, halfHourFee, hourFee } = resp.data;
     return {
