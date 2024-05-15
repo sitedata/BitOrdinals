@@ -20,11 +20,11 @@ export function RetrieveTaprootToNativeSegwitLayout(
       <Flex alignItems="start" flexDirection="column" mt="-45px" mx="space.06" textAlign="left">
         <BtcIcon />
         <styled.span mt="space.04" textStyle="label.01">
-          Retrieve Bitcoin deposited to <br /> Taproot addresses
+          Retrieve Bitnet IO deposited to <br /> Taproot addresses
         </styled.span>
         <styled.span mt="space.05" textStyle="body.02">
           Taproot addresses are used by Leather for BitOrdinal inscriptions, but they can also contain
-          bitcoin.
+          bitnet.
         </styled.span>
         <styled.span mt="space.04" textStyle="body.02">
           As we don't support tranferring from Taproot addresses yet, you can retrieve funds to your
@@ -45,7 +45,7 @@ export function RetrieveTaprootToNativeSegwitLayout(
           width="100%"
           my="space.05"
         >
-          Retrieve bitcoin
+          Retrieve Bitnet IO
         </Button>
       </Flex>
     </BaseDrawer>

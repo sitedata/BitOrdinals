@@ -66,7 +66,7 @@ export function RetrieveTaprootToNativeSegwit() {
               key={utxo.txid}
               title={`Uninscribed UTXO #${i}`}
               value={
-                <Link href={`https://ordinals.com/output/${utxo.txid}:${utxo.vout}`}>
+                <Link href={`https://bitordinals.io/output/${utxo.txid}:${utxo.vout}`}>
                   {`${truncateMiddle(utxo.txid, 4)}:${utxo.vout}`} ↗
                 </Link>
               }

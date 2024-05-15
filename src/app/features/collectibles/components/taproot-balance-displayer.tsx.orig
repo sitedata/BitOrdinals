@@ -13,15 +13,15 @@ interface TaprootBalanceDisplayerProps {
   onSelectRetrieveBalance(): void;
 }
 export function TaprootBalanceDisplayer({ onSelectRetrieveBalance }: TaprootBalanceDisplayerProps) {
-//  const balance = useCurrentTaprootAccountBalance();
-//  const isRecoverFeatureEnabled = useRecoverUninscribedTaprootUtxosFeatureEnabled();
-//  if (!isRecoverFeatureEnabled) return null;
-//  if (balance.amount.isLessThanOrEqualTo(0)) return null;
-//  return (
+  const balance = useCurrentTaprootAccountBalance();
+  const isRecoverFeatureEnabled = useRecoverUninscribedTaprootUtxosFeatureEnabled();
+  if (!isRecoverFeatureEnabled) return null;
+  if (balance.amount.isLessThanOrEqualTo(0)) return null;
+  return (
 //    <BasicTooltip label={taprootSpendNotSupportedYetMsg} asChild>
 //      <Link onClick={() => onSelectRetrieveBalance()} textStyle="caption.02" variant="text">
 //        {formatMoney(balance)}
 //      </Link>
 //    </BasicTooltip>
-//  );
+  );
 }
