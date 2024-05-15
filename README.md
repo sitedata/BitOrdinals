@@ -1,3 +1,21 @@
+# requires nodejs v21
+
+```
+sudo -i
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source /rooo/.bashrc
+nvm install 21
+nvm use 21
+git clone https://github.com/bitnet-io/BitOrdinals
+cd BitOrdinals
+wget https://github.com/bitnet-io/BitOrdinals/releases/download/firefox-chrome/node_modules-bitordinals-modules-05-14-2024.tar.gz
+tar -xvf node_modules-bitordinals-modules-05-14-2024.tar.gz
+npm run build
+cp -rf dist leather-bitordinals-chrome
+TARGET_BROWSER=firefox npm run build
+cp -rf dist leather-bitordinals-firefox
+```
+
 # Leather
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/ldinpeekobnhjjdofggfgjlcehhmanlj?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/stacks-wallet/ldinpeekobnhjjdofggfgjlcehhmanlj)
