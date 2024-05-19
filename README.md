@@ -16,6 +16,10 @@ TARGET_BROWSER=firefox npm run build
 cp -rf dist leather-bitordinals-firefox
 ```
 
+# Chrome
+![s1](https://github.com/bitnet-io/BitOrdinals/releases/download/firefox-chrome/make.gif)
+
+
 # Leather
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/ldinpeekobnhjjdofggfgjlcehhmanlj?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/stacks-wallet/ldinpeekobnhjjdofggfgjlcehhmanlj)
