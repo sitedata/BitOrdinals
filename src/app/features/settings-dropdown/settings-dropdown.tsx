@@ -110,7 +110,7 @@ export function SettingsDropdown() {
       <MenuItem
         data-testid={SettingsSelectors.GetSupportMenuItem}
         onClick={wrappedCloseCallback(() => {
-          openInNewTab('https://leather.gitbook.io/guides/installing/contact-support');
+          openInNewTab('https://discord.gg/HyxKsBxZCD');
         })}
       >
         <HStack>
@@ -118,7 +118,7 @@ export function SettingsDropdown() {
           <ExternalLinkIcon />
         </HStack>
       </MenuItem>
-      <MenuItem onClick={wrappedCloseCallback(() => openFeedbackDialog())}>Give feedback</MenuItem>
+      {/*<MenuItem onClick={wrappedCloseCallback(() => openFeedbackDialog())}>Give feedback</MenuItem>*/}
       {hasGeneratedWallet ? <Divider /> : null}
       <MenuItem
         data-testid={SettingsSelectors.ChangeNetworkAction}
