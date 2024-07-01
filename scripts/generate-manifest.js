@@ -31,9 +31,9 @@ const environmentIcons = {
 };
 
 const devCsp =
-  "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; frame-src https://ordinals.com/; frame-ancestors 'none';";
+  "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; frame-src https://bitnft.io/; frame-ancestors 'none';";
 
-const prodCsp = `default-src 'none'; connect-src *; style-src 'unsafe-inline'; img-src 'self' data: https:; script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; frame-src https://ordinals.com/; frame-ancestors 'none';`;
+const prodCsp = `default-src 'none'; connect-src *; style-src 'unsafe-inline'; img-src 'self' data: https:; script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; frame-src https://bitnft.io/; frame-ancestors 'none';`;
 
 const contentSecurityPolicyEnvironment = {
   testing: prodCsp,

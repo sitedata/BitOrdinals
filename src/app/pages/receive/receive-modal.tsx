@@ -117,7 +117,7 @@ export function ReceiveModal({ type = 'full' }: ReceiveModalProps) {
                   },
                 });
               }}
-              title="BitOrdinal inscription"
+              title="BitOrdinal inscription (taproot)"
             />
             <ReceiveItem
               address={stxAddress}

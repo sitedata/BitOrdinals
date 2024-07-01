@@ -15,6 +15,7 @@ function fetchTransactionFeeEstimation(currentNetwork: any, limiter: RateLimiter
     await limiter.removeTokens(1);
     const resp = await axios.post<StacksTxFeeEstimation>(
       currentNetwork.chain.stacks.url + '/v2/fees/transaction',
+//      currentNetwork.chain.stacks.url + '/v2/fees/transfer',
       {
         estimated_len: estimatedLen,
         transaction_payload: transactionPayload,

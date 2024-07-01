@@ -2,7 +2,7 @@ import { styled } from 'leather-styles/jsx';
 
 import { SvgProps } from '@app/ui/ui-types';
 
-export function QrCodeIcon({ size = 'sm', ...props }: SvgProps) {
+export function QrCodeIcon({ size = 'md', ...props }: SvgProps) {
   return (
     <styled.svg
       fill="none"

@@ -69,6 +69,8 @@ export function BtcSentSummary() {
       <Stack pb="space.06" px="space.06" width="100%">
         <InfoCardRow title="To" value={<FormAddressDisplayer address={recipient} />} />
         <InfoCardSeparator />
+        <InfoCardRow title="It will take 1 confirmation to go by for your wallet to update" />
+        <InfoCardSeparator />
         <InfoCardRow title="Total spend" value={totalSpend} />
 
         <InfoCardRow title="Sending" value={sendingValue} />

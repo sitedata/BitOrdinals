@@ -81,9 +81,24 @@ export function AccountActions(props: FlexProps) {
           <ActionButton
           data-testid={HomePageSelectors.FundAccountBtn}
           icon={<PlusIcon />}
-          label="Send BIT-20"
+          label="Transfer BIT-20"
 //          onClick={() => navigate(RouteUrls.FundChooseCurrency)}
 	    onClick={() => { openInNewTab('https://bitnet-io.org/NFT/transfer.html'); }}
+          />
+        ),
+        [ChainID.Testnet]: null,
+      })}
+
+
+
+      {whenStacksChainId(currentNetwork.chain.stacks.chainId)({
+        [ChainID.Mainnet]: (
+          <ActionButton
+          data-testid={HomePageSelectors.FundAccountBtn}
+          icon={<PlusIcon />}
+          label="Check Transferable Balance BIT-20"
+//          onClick={() => navigate(RouteUrls.FundChooseCurrency)}
+	    onClick={() => { openInNewTab('https://bitnet-io.org/NFT/transfer-check.html'); }}
           />
         ),
         [ChainID.Testnet]: null,

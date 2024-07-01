@@ -79,7 +79,8 @@ export interface NetworkConfiguration {
   };
 }
 
-export const HIRO_API_BASE_URL_MAINNET = 'https://bitnft.io';
+//export const HIRO_API_BASE_URL_MAINNET = 'https://explorer.bitnft.io';
+export const HIRO_API_BASE_URL_MAINNET = 'https://explorer.bitnft.io';
 export const HIRO_API_BASE_URL_TESTNET = 'https://api.testnet.hiro.so';
 export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscriptions';
 

@@ -75,6 +75,8 @@ export function SendInscriptionSummary() {
         <Stack mb="space.06" width="100%">
           <InfoCardRow title="To" value={<FormAddressDisplayer address={recipient} />} />
           <InfoCardSeparator />
+          <InfoCardRow title="It will take 1 confirmation to go by for your wallet to update" />
+          <InfoCardSeparator />
           {arrivesIn && <InfoCardRow title="Estimated confirmation time" value={arrivesIn} />}
           <InfoCardRow title="Fee" value={feeRowValue} />
         </Stack>

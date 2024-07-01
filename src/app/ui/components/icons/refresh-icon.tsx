@@ -2,7 +2,7 @@ import { styled } from 'leather-styles/jsx';
 
 import { SvgProps } from '@app/ui/ui-types';
 
-export function RefreshIcon({ size = 'sm', ...props }: SvgProps) {
+export function RefreshIcon({ size = 'lg', ...props }: SvgProps) {
   return (
     <styled.svg
       xmlns="http://www.w3.org/2000/svg"

@@ -118,7 +118,7 @@ export function LedgerSignJwtContainer() {
     try {
       legacyAddressObj = getBitcoinAddressesLegacyFormat(accountIndex);
     } catch (e) {
-      logger.error('Error while generating bitcoin addresses to return', e);
+      logger.error('Error while generating Bitnet IO addresses to return', e);
     }
 
     try {

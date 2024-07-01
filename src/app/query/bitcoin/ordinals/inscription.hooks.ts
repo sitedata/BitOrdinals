@@ -12,7 +12,7 @@ export function createInscriptionInfoUrl(id: string) {
 }
 
 function createIframePreviewUrl(id: string) {
-  return `https://bitordinals.io/preview/${id}`;
+  return `https://bitnft.io/ordinals/v1/inscriptions/${id}/content`;
 }
 
 export function convertInscriptionToSupportedInscriptionType(inscription: Inscription) {

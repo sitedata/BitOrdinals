@@ -24,13 +24,13 @@ class AddressApi {
   constructor(public configuration: Configuration) {}
 
   async getTransactionsByAddress(address: string) {
-    const resp = await axios.get(`https://bitexplorer.io/api/address/${address}/txs`);
+    const resp = await axios.get(`https://bitexplorer.io/api/v1/address/${address}/txs`);
     return resp.data;
   }
 
   async getUtxosByAddress(address: string): Promise<UtxoResponseItem[]> {
     const resp = await axios.get<UtxoResponseItem[]>(
-      `https://bitexplorer.io/api/address/${address}/utxo`
+      `https://bitnft.io/api/address/${address}/utxo`
     );
     return resp.data.sort((a, b) => a.vout - b.vout);
   }
