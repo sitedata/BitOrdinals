@@ -9,7 +9,7 @@ export function ArrowUpIcon({ size = 'sm', ...props }: SvgProps) {
       height={size}
       viewBox="0 0 16 16"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       {...props}
     >
       <path

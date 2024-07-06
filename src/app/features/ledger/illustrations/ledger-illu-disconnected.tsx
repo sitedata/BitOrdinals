@@ -5,7 +5,7 @@ export function LedgerIlluDisconnected(props: React.SVGProps<SVGSVGElement>) {
       height="112"
       viewBox="0 0 292 112"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       {...props}
     >
       <path d="M6 53.5H11.5V58.5H5" stroke="#FF5863" />

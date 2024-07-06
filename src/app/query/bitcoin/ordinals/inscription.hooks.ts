@@ -9,10 +9,12 @@ import { useGetInscriptionQuery } from './inscription.query';
 
 export function createInscriptionInfoUrl(id: string) {
   return `https://bitnft.io/inscription/${id}`;
+  return ``;
 }
 
 function createIframePreviewUrl(id: string) {
   return `https://bitnft.io/ordinals/v1/inscriptions/${id}/content`;
+  return ``;
 }
 
 export function convertInscriptionToSupportedInscriptionType(inscription: Inscription) {

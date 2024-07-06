@@ -5,7 +5,7 @@ export function UnsupportedBrowserImg() {
       height="182"
       viewBox="0 0 240 182"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
     >
       <path d="M38.5 22.5H190.5V53.5V69V84.5V146.5H38.5V22.5Z" stroke="currentColor" />
       <path

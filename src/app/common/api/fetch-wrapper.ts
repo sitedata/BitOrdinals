@@ -30,9 +30,9 @@ export async function wrappedFetch(input: RequestInfo, init: RequestInit = {}) {
   if (isErrorCode(resp.status)) trackApiError(resp.url, resp.status);
   return resp;
 }
-
+//bitexplorer.io
 axios.interceptors.request.use(request => {
-  if (request.url?.includes('bitnft.io'))
+  if (request.url?.includes('api.mainnet.hiro.so'))
     Object.entries(leatherHeaders).forEach(([key, value]) => request.headers.set(key, value));
 
   return request;

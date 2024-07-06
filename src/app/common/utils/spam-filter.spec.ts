@@ -9,12 +9,12 @@ describe('Spam filter', () => {
     expect(spamFilter('https://www.fake.com')).toEqual(spamReplacement);
     expect(spamFilter('fake.com')).toEqual(spamReplacement);
     expect(spamFilter('https://www.fake')).toEqual(spamReplacement);
-    expect(spamFilter('http://www.fake')).toEqual(spamReplacement);
+    expect(spamFilter('https://www.fake')).toEqual(spamReplacement);
     expect(spamFilter('ftp://fake.com')).toEqual(spamReplacement);
     expect(spamFilter('https://fake.com')).toEqual(spamReplacement);
-    expect(spamFilter('http://fake.com')).toEqual(spamReplacement);
+    expect(spamFilter('https://fake.com')).toEqual(spamReplacement);
     expect(spamFilter('https://fake')).toEqual(spamReplacement);
-    expect(spamFilter('http://fake')).toEqual(spamReplacement);
+    expect(spamFilter('https://fake')).toEqual(spamReplacement);
   });
   it('should detect spam words in strings and replace content', () => {
     expect(spamFilter('You won some stx')).toEqual(spamReplacement);

@@ -5,7 +5,7 @@ export function ConnectLedgerSuccess() {
       height="104"
       viewBox="0 0 292 104"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
     >
       <path d="M7.5 50.5H31.5V55.5H7.5" stroke="currentColor" />
       <path d="M2.5 50.5H5" stroke="currentColor" />

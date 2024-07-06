@@ -24,7 +24,7 @@ class AddressApi {
   constructor(public configuration: Configuration) {}
 
   async getTransactionsByAddress(address: string) {
-    const resp = await axios.get(`https://bitexplorer.io/api/v1/address/${address}/txs`);
+    const resp = await axios.get(`https://bitnft.io/api/address/${address}/txs`);
     return resp.data;
   }
 

@@ -6,7 +6,7 @@ interface BitcoinTransactionStatusProps {
   transaction: BitcoinTx;
 }
 const pendingWaitingMessage =
-  'This transaction is waiting to be confirmed. The average (median) confirmation time on Bitcoin is 5-10 minutes';
+  'This transaction is waiting to be confirmed. The average (median) confirmation time on Bitnet IO is 3.5 minutes';
 
 export function BitcoinTransactionStatus({ transaction }: BitcoinTransactionStatusProps) {
   const isPending = !transaction.status.confirmed;

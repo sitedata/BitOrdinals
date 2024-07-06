@@ -31,10 +31,10 @@ export const GITHUB_REPO = 'extension';
 
 export enum WalletDefaultNetworkConfigurationIds {
   mainnet = 'mainnet',
-  testnet = 'testnet',
-  signet = 'signet',
-  sbtcDevenv = 'sbtcDevenv',
-  devnet = 'devnet',
+//  testnet = 'testnet',
+//  signet = 'signet',
+//  sbtcDevenv = 'sbtcDevenv',
+//  devnet = 'devnet',
 }
 
 export type DefaultNetworkConfigurations = keyof typeof WalletDefaultNetworkConfigurationIds;
@@ -80,9 +80,13 @@ export interface NetworkConfiguration {
 }
 
 //export const HIRO_API_BASE_URL_MAINNET = 'https://explorer.bitnft.io';
-export const HIRO_API_BASE_URL_MAINNET = 'https://explorer.bitnft.io';
-export const HIRO_API_BASE_URL_TESTNET = 'https://api.testnet.hiro.so';
+export const HIRO_API_BASE_URL_MAINNET = 'https://api.mainnet.hiro.so';
+//export const HIRO_API_BASE_URL_MAINNET = 'https://explorer.bitnft.io';
+
 export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscriptions';
+
+//export const HIRO_INSCRIPTIONS_API_URL = 'https://bitnft.io/ordinals/v1/inscriptions';
+export const HIRO_API_BASE_URL_TESTNET = 'https://api.testnet.hiro.so';
 
 export const BITCOIN_API_BASE_URL_MAINNET = 'https://bitnft.io/api';
 export const BITCOIN_API_BASE_URL_TESTNET = 'https://blockstream.info/testnet/api';
@@ -146,12 +150,12 @@ const networkSbtcDevenv: NetworkConfiguration = {
     stacks: {
       blockchain: 'stacks',
       chainId: ChainID.Testnet,
-      url: 'http://localhost:3999',
+      url: 'https://localhost:3999',
     },
     bitcoin: {
       blockchain: 'bitcoin',
       bitcoinNetwork: 'regtest',
-      bitcoinUrl: 'http://localhost:8999/api',
+      bitcoinUrl: 'https://localhost:8999/api',
     },
   },
 };
@@ -163,12 +167,12 @@ const networkDevnet: NetworkConfiguration = {
     stacks: {
       blockchain: 'stacks',
       chainId: ChainID.Testnet,
-      url: 'http://localhost:3999',
+      url: 'https://localhost:3999',
     },
     bitcoin: {
       blockchain: 'bitcoin',
       bitcoinNetwork: 'regtest',
-      bitcoinUrl: 'http://localhost:18443',
+      bitcoinUrl: 'https://localhost:18443',
     },
   },
 };
